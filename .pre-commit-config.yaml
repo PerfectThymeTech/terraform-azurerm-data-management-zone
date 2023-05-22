@@ -1,7 +1,6 @@
 exclude: |
   (?x)^(
-    code/data-landing-zone/README.md|
-    code/data-management-zone/README.md
+    README.md
   )$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
