@@ -1,8 +1,8 @@
 module "data_management_zone" {
   source = "../"
   providers = {
-    azurerm       = azurerm
-    azure / azapi = azure / azapi
+    azurerm = azurerm
+    azapi   = azapi
   }
 
   company_name                           = var.company_name
