@@ -102,24 +102,15 @@ resource "azurerm_storage_management_policy" "datalake_management_policy" {
   }
 }
 
-# resource "azurerm_storage_container" "datalake_container_unity" {  # Requires private connectivity as this does not use the ARM API
-#   name                 = local.unity_container_name
-#   storage_account_name = azurerm_storage_account.datalake.name
+resource "azurerm_storage_container" "datalake_container_unity" {
+  name                 = local.unity_container_name
+  storage_account_name = azurerm_storage_account.datalake.name
 
-#   container_access_type = "private"
-# }
+  container_access_type = "private"
 
-resource "azapi_resource" "datalake_container_unity" {
-  type      = "Microsoft.Storage/storageAccounts/blobServices/containers@2021-02-01"
-  name      = local.unity_container_name
-  parent_id = "${azurerm_storage_account.datalake.id}/blobServices/default"
-
-  body = jsonencode({
-    properties = {
-      publicAccess = "None"
-      metadata     = {}
-    }
-  })
+  depends_on = [
+    azurerm_role_assignment.current_roleassignment_storage
+  ]
 }
 
 resource "azurerm_private_endpoint" "datalake_private_endpoint_blob" {
