@@ -14,7 +14,7 @@ jobs:
     name: "Terraform Lint"
     with:
       terraform_version: "1.4.6"
-      working_directory: "./test/e2e"
+      working_directory: "./tests/e2e"
 
   terraform_plan_dev:
     uses: ./.github/workflows/_terraformPlanTemplate.yml
@@ -23,7 +23,7 @@ jobs:
     with:
       environment: "dev"
       terraform_version: "1.4.6"
-      working_directory: "./test/e2e"
+      working_directory: "./tests/e2e"
     secrets:
       TENANT_ID: ${{ secrets.TENANT_ID }}
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -38,7 +38,7 @@ jobs:
     with:
       environment: "dev"
       terraform_version: "1.4.6"
-      working_directory: "./test/e2e"
+      working_directory: "./tests/e2e"
     secrets:
       TENANT_ID: ${{ secrets.TENANT_ID }}
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
