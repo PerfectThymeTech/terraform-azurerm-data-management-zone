@@ -5,7 +5,7 @@ resource "databricks_metastore" "metastore" {
   delta_sharing_recipient_token_lifetime_in_seconds = 0
   delta_sharing_scope                               = "INTERNAL"
   owner                                             = data.azurerm_client_config.current.client_id
-  storage_root                                      = "abfss://${azurerm_storage_account.datalake.name}@${azapi_resource.datalake_container_unity.name}.dfs.core.windows.net/"
+  storage_root                                      = "abfss://${azurerm_storage_account.datalake.name}@${azurerm_storage_container.datalake_container_unity.name}.dfs.core.windows.net/"
   force_destroy                                     = true
 
   depends_on = [
