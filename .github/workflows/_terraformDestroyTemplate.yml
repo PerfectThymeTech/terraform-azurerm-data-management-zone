@@ -75,8 +75,8 @@ jobs:
         run: |
           terraform init
 
-      # Terraform Apply
-      - name: Terraform Apply
+      # Terraform Destroy
+      - name: Terraform Destroy
         working-directory: ${{ inputs.working_directory }}
         run: |
           terraform apply -var-file vars.${{ inputs.environment }}.tfvars -auto-approve -input=false -destroy
