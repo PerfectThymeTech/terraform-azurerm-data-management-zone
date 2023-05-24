@@ -18,7 +18,7 @@ resource "azurerm_resource_deployment_script_azure_power_shell" "purview_admin_o
   }
   force_update_tag       = timestamp()
   retention_interval     = "P1D"
-  script_content         = file("./scripts/SetupPurview.ps1")
+  script_content         = file("${path.module}/scripts/SetupPurview.ps1")
   supporting_script_uris = []
   timeout                = "PT30M"
   version                = "6.3"
