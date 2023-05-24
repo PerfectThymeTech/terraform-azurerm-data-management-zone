@@ -102,6 +102,14 @@ resource "azurerm_storage_management_policy" "datalake_management_policy" {
   }
 }
 
+resource "time_sleep" "sleep" {
+  create_duration = "30s"
+
+  depends_on = [
+    azurerm_role_assignment.current_roleassignment_storage
+  ]
+}
+
 resource "azurerm_storage_container" "datalake_container_unity" {
   name                 = local.unity_container_name
   storage_account_name = azurerm_storage_account.datalake.name
@@ -109,7 +117,7 @@ resource "azurerm_storage_container" "datalake_container_unity" {
   container_access_type = "private"
 
   depends_on = [
-    azurerm_role_assignment.current_roleassignment_storage
+    time_sleep.sleep
   ]
 }
 
