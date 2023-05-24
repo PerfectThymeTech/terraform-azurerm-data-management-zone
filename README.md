@@ -30,6 +30,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.16)
 
+- <a name="requirement_time"></a> [time](#requirement\_time) (0.9.1)
+
 ## Modules
 
 No modules.
@@ -186,7 +188,7 @@ Default: `[]`
 
 ### <a name="input_subnet_cidr_ranges"></a> [subnet\_cidr\_ranges](#input\_subnet\_cidr\_ranges)
 
-Description: Specifies the cidr ranges of the subnets used for the stamp.
+Description: Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets.
 
 Type:
 
