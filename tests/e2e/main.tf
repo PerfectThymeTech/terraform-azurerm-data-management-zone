@@ -13,6 +13,7 @@ module "data_management_zone" {
   vnet_id                                = var.vnet_id
   nsg_id                                 = var.nsg_id
   route_table_id                         = var.route_table_id
+  subnet_cidr_ranges                     = var.subnet_cidr_ranges
   private_dns_zone_id_namespace          = var.private_dns_zone_id_namespace
   private_dns_zone_id_purview_account    = var.private_dns_zone_id_purview_account
   private_dns_zone_id_purview_portal     = var.private_dns_zone_id_purview_portal
