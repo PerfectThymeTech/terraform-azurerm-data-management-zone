@@ -30,8 +30,6 @@ The following requirements are needed by this module:
 
 - <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.16)
 
-- <a name="requirement_time"></a> [time](#requirement\_time) (0.9.1)
-
 ## Modules
 
 No modules.
