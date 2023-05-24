@@ -109,7 +109,9 @@ resource "azurerm_storage_container" "datalake_container_unity" {
   container_access_type = "private"
 
   depends_on = [
-    azurerm_role_assignment.current_roleassignment_storage
+    azurerm_role_assignment.current_roleassignment_storage,
+    azurerm_private_endpoint.datalake_private_endpoint_blob,
+    azurerm_private_endpoint.datalake_private_endpoint_dfs
   ]
 }
 

@@ -69,7 +69,7 @@ variable "route_table_id" {
 }
 
 variable "subnet_cidr_ranges" {
-  description = "Specifies the cidr ranges of the subnets used for the stamp."
+  description = "Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets."
   type = object(
     {
       private_endpoint_subnet   = optional(string, "")

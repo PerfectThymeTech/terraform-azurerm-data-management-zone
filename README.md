@@ -186,7 +186,7 @@ Default: `[]`
 
 ### <a name="input_subnet_cidr_ranges"></a> [subnet\_cidr\_ranges](#input\_subnet\_cidr\_ranges)
 
-Description: Specifies the cidr ranges of the subnets used for the stamp.
+Description: Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets.
 
 Type:
 

@@ -3,17 +3,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "code/**"
-      - "requirements.txt"
-      - ".github/workflows/lint.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "code/**"
-      - "requirements.txt"
-      - ".github/workflows/lint.yml"
 
 jobs:
   lint:
