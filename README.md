@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# CloudScaleAnalytics v2
+# CloudScaleAnalytics v2 - Data Management Zone
 
 This project revisits the Cloud Scale Analytics data platform reference architecture for Microsoft Azure. While the core principles of the architecture design have not changed, the next generation of the design will and enhance and introduce many new capabilities that will simplify the overall management, onboarding and significantly reduce the time to market.
 
@@ -212,7 +212,39 @@ Default: `{}`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_container_registry_id"></a> [container\_registry\_id](#output\_container\_registry\_id)
+
+Description: Specifies the id of the container registry.
+
+### <a name="output_databricks_access_connector_id"></a> [databricks\_access\_connector\_id](#output\_databricks\_access\_connector\_id)
+
+Description: Specifies the id of the databricks access connector.
+
+### <a name="output_databricks_datalake_id"></a> [databricks\_datalake\_id](#output\_databricks\_datalake\_id)
+
+Description: Specifies the id of the datalake used as a default for the databricks metastore.
+
+### <a name="output_databricks_metastore_id"></a> [databricks\_metastore\_id](#output\_databricks\_metastore\_id)
+
+Description: Specifies the id of the databricks metastore.
+
+### <a name="output_databricks_workspace_id"></a> [databricks\_workspace\_id](#output\_databricks\_workspace\_id)
+
+Description: Specifies the id of the databricks workspace.
+
+### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+
+Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
+
+### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
+
+Description: Specifies the id of the Microsoft Purview account.
+
+### <a name="output_synapse_private_link_hub_id"></a> [synapse\_private\_link\_hub\_id](#output\_synapse\_private\_link\_hub\_id)
+
+Description: Specifies the id of the Azure synapse private link hub.
 
 <!-- markdownlint-enable -->
 ## License
