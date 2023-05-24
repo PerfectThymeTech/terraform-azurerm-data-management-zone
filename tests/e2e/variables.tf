@@ -81,9 +81,9 @@ variable "subnet_cidr_ranges" {
   default   = {}
   validation {
     condition = alltrue([
-      try(cidrnetmask(var.subnet_cidr_ranges.private_endpoint_subnet), "invalid") != "invalid",
-      try(cidrnetmask(var.subnet_cidr_ranges.databricks_private_subnet), "invalid") != "invalid",
-      try(cidrnetmask(var.subnet_cidr_ranges.databricks_public_subnet), "invalid") != "invalid",
+      var.subnet_cidr_ranges.private_endpoint_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.private_endpoint_subnet), "invalid") != "invalid",
+      var.subnet_cidr_ranges.databricks_private_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.databricks_private_subnet), "invalid") != "invalid",
+      var.subnet_cidr_ranges.databricks_public_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.databricks_public_subnet), "invalid") != "invalid",
     ])
     error_message = "Please specify a valid CIDR range for all subnets."
   }
