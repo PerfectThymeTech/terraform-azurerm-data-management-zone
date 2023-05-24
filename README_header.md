@@ -12,4 +12,4 @@ The Cloud Scale Analytics reference architecture consists of the following core 
 
 3. A *Data Application* environment is a bounded context within a *Data Landing Zone*. A *Data Application* is concerned with consuming, processing and producing data as an output. These outputs should no longer be treated as byproducts but rather be managed as a full product that has a defined service-level-agreement.
 
-![Cloud-scale Analytics v2](/docs/media/CloudScaleAnalyticsv2.gif)
+![Cloud-scale Analytics v2](/docs/media/CloudScaleAnalyticsv2.png)
