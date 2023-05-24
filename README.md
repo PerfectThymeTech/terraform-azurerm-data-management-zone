@@ -1,5 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-# CloudScaleAnalytics v2 Terraform
+# CloudScaleAnalytics v2
 
 This project revisits the Cloud Scale Analytics data platform reference architecture for Microsoft Azure. While the core principles of the architecture design have not changed, the next generation of the design will and enhance and introduce many new capabilities that will simplify the overall management, onboarding and significantly reduce the time to market.
 
