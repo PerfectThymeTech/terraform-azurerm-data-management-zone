@@ -13,7 +13,19 @@ The Cloud Scale Analytics reference architecture consists of the following core 
 
 3. A *Data Application* environment is a bounded context within a *Data Landing Zone*. A *Data Application* is concerned with consuming, processing and producing data as an output. These outputs should no longer be treated as byproducts but rather be managed as a full product that has a defined service-level-agreement.
 
-![Cloud-scale Analytics v2](/docs/media/CloudScaleAnalyticsv2.png)
+![Cloud-scale Analytics v2](https://raw.githubusercontent.com/PerfectThymeTech/terraform-azurerm-data-management-zone/main/docs/media/CloudScaleAnalyticsv2.gif)
+
+## Architecture
+
+The following architecture will be deployed by this module, whereby the module expects that the Vnet, Route Table and NSG already exists within the Azure Landing Zone:
+
+![Data Management Zone Architecture](https://raw.githubusercontent.com/PerfectThymeTech/terraform-azurerm-data-management-zone/main/docs/media/DataManagementZoneArchitecture.png)
+
+## Prerequisites
+
+- An Azure subscription. If you don't have an Azure subscription, [create your Azure free account today](https://azure.microsoft.com/free/).
+- (1) [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) and [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or (2) [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner) access to the subscription to be able to create resources and role assignments.
+- A [GitHub self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) or an [Azure DevOps self-hosted agent](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops) to be able to access the data-plane of services.
 
 ## Documentation
 <!-- markdownlint-disable MD033 -->
@@ -253,6 +265,6 @@ Description: Specifies the id of the Azure synapse private link hub.
 
 ## Contributing
 
-This project accepts public contributions. Please use issues, pull requests and the discussins feature in case you have any questions or concerns.
+This project accepts public contributions. Please use issues, pull requests and the discussins feature in case you have any questions or want to enhance this module.
 
 <!-- END_TF_DOCS -->
