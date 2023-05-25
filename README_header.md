@@ -16,7 +16,7 @@ The Cloud Scale Analytics reference architecture consists of the following core 
 
 ## Architecture
 
-The following architecture will be deployed by this module, whereby the module expects that the Vnet, Route Table and NSG already exists within the Azure Landing Zone:
+The following architecture will be deployed by this module, whereby the module expects that the Vnet, Route Table and NSG already exists within the Azure Landing Zone and respective resource IDs are provided as input:
 
 ![Data Management Zone Architecture](https://raw.githubusercontent.com/PerfectThymeTech/terraform-azurerm-data-management-zone/main/docs/media/DataManagementZoneArchitecture.png)
 
