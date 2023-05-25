@@ -25,6 +25,7 @@ The following architecture will be deployed by this module, whereby the module e
 
 - An Azure subscription. If you don't have an Azure subscription, [create your Azure free account today](https://azure.microsoft.com/free/).
 - (1) [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) and [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or (2) [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner) access to the subscription to be able to create resources and role assignments.
+- [Databricks Account Administrator](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/#--what-are-account-admins) role in the Databricks Account.
 - A [GitHub self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) or an [Azure DevOps self-hosted agent](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops) to be able to access the data-plane of services.
 
 ## Usage
@@ -32,8 +33,7 @@ The following architecture will be deployed by this module, whereby the module e
 We recommend starting with the following configuration in your root module to learn what resources are created by the module and how it works.
 
 ```hcl
-# Configure Terraform to set the required AzureRM provider
-# version and features{} block.
+# Configure Terraform to set the required AzureRM provider version and features{} block.
 
 terraform {
   required_providers {
@@ -80,8 +80,7 @@ locals {
   private_dns_zone_id_databricks         = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
 }
 
-# Declare the Data Management Terraform module
-# and provide a base configuration.
+# Declare the Data Management Zone Terraform module and provide a base configuration.
 module "data_management_zone" {
   source  = "PerfectThymeTech/data-management-zone/azurerm"
   version = "0.1.1"
@@ -192,7 +191,7 @@ Default: `"dev"`
 
 ### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -200,7 +199,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_container_registry"></a> [private\_dns\_zone\_id\_container\_registry](#input\_private\_dns\_zone\_id\_container\_registry)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Container Registry.
+Description: Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -208,7 +207,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_databricks"></a> [private\_dns\_zone\_id\_databricks](#input\_private\_dns\_zone\_id\_databricks)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints.
+Description: Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -216,7 +215,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_dfs"></a> [private\_dns\_zone\_id\_dfs](#input\_private\_dns\_zone\_id\_dfs)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -224,7 +223,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_key_vault"></a> [private\_dns\_zone\_id\_key\_vault](#input\_private\_dns\_zone\_id\_key\_vault)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Key Vault.
+Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -232,7 +231,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_namespace"></a> [private\_dns\_zone\_id\_namespace](#input\_private\_dns\_zone\_id\_namespace)
 
-Description: Specifies the resource ID of the private DNS zone for the EventHub namespace.
+Description: Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -240,7 +239,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_purview_account"></a> [private\_dns\_zone\_id\_purview\_account](#input\_private\_dns\_zone\_id\_purview\_account)
 
-Description: Specifies the resource ID of the private DNS zone for the Purview account.
+Description: Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -248,7 +247,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_purview_portal"></a> [private\_dns\_zone\_id\_purview\_portal](#input\_private\_dns\_zone\_id\_purview\_portal)
 
-Description: Specifies the resource ID of the private DNS zone for the Purview portal.
+Description: Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -256,7 +255,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_queue"></a> [private\_dns\_zone\_id\_queue](#input\_private\_dns\_zone\_id\_queue)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
@@ -264,7 +263,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_synapse_portal"></a> [private\_dns\_zone\_id\_synapse\_portal](#input\_private\_dns\_zone\_id\_synapse\_portal)
 
-Description: Specifies the resource ID of the private DNS zone for Synapse PL Hub.
+Description: Specifies the resource ID of the private DNS zone for Synapse PL Hub. Not required if DNS A-records get created via Azue Policy.
 
 Type: `string`
 
