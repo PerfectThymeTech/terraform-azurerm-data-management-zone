@@ -79,8 +79,7 @@ locals {
   private_dns_zone_id_databricks         = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
 }
 
-# Declare the Data Management Terraform module
-# and provide a base configuration.
+# Declare the Data Management Terraform module and provide a base configuration.
 module "data_management_zone" {
   source  = "PerfectThymeTech/data-management-zone/azurerm"
   version = "0.1.1"
