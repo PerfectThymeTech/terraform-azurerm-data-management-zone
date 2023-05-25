@@ -31,8 +31,7 @@ The following architecture will be deployed by this module, whereby the module e
 We recommend starting with the following configuration in your root module to learn what resources are created by the module and how it works.
 
 ```hcl
-# Configure Terraform to set the required AzureRM provider
-# version and features{} block.
+# Configure Terraform to set the required AzureRM provider version and features{} block.
 
 terraform {
   required_providers {
@@ -79,7 +78,7 @@ locals {
   private_dns_zone_id_databricks         = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/privateDnsZones/privatelink.azuredatabricks.net"
 }
 
-# Declare the Data Management Terraform module and provide a base configuration.
+# Declare the Data Management Zone Terraform module and provide a base configuration.
 module "data_management_zone" {
   source  = "PerfectThymeTech/data-management-zone/azurerm"
   version = "0.1.1"
