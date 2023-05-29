@@ -191,7 +191,7 @@ Default: `"dev"`
 
 ### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -199,7 +199,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_container_registry"></a> [private\_dns\_zone\_id\_container\_registry](#input\_private\_dns\_zone\_id\_container\_registry)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -207,7 +207,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_databricks"></a> [private\_dns\_zone\_id\_databricks](#input\_private\_dns\_zone\_id\_databricks)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -215,7 +215,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_dfs"></a> [private\_dns\_zone\_id\_dfs](#input\_private\_dns\_zone\_id\_dfs)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -223,7 +223,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_key_vault"></a> [private\_dns\_zone\_id\_key\_vault](#input\_private\_dns\_zone\_id\_key\_vault)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -231,7 +231,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_namespace"></a> [private\_dns\_zone\_id\_namespace](#input\_private\_dns\_zone\_id\_namespace)
 
-Description: Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -239,7 +239,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_purview_account"></a> [private\_dns\_zone\_id\_purview\_account](#input\_private\_dns\_zone\_id\_purview\_account)
 
-Description: Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -247,7 +247,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_purview_portal"></a> [private\_dns\_zone\_id\_purview\_portal](#input\_private\_dns\_zone\_id\_purview\_portal)
 
-Description: Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -255,7 +255,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_queue"></a> [private\_dns\_zone\_id\_queue](#input\_private\_dns\_zone\_id\_queue)
 
-Description: Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -263,7 +263,7 @@ Default: `""`
 
 ### <a name="input_private_dns_zone_id_synapse_portal"></a> [private\_dns\_zone\_id\_synapse\_portal](#input\_private\_dns\_zone\_id\_synapse\_portal)
 
-Description: Specifies the resource ID of the private DNS zone for Synapse PL Hub. Not required if DNS A-records get created via Azue Policy.
+Description: Specifies the resource ID of the private DNS zone for Synapse PL Hub. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
