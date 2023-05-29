@@ -90,7 +90,7 @@ variable "subnet_cidr_ranges" {
 }
 
 variable "private_dns_zone_id_namespace" {
-  description = "Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -101,7 +101,7 @@ variable "private_dns_zone_id_namespace" {
 }
 
 variable "private_dns_zone_id_purview_account" {
-  description = "Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -112,7 +112,7 @@ variable "private_dns_zone_id_purview_account" {
 }
 
 variable "private_dns_zone_id_purview_portal" {
-  description = "Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -123,7 +123,7 @@ variable "private_dns_zone_id_purview_portal" {
 }
 
 variable "private_dns_zone_id_blob" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Storage blob endpoints. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -134,7 +134,7 @@ variable "private_dns_zone_id_blob" {
 }
 
 variable "private_dns_zone_id_dfs" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -145,7 +145,7 @@ variable "private_dns_zone_id_dfs" {
 }
 
 variable "private_dns_zone_id_queue" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Storage queue endpoints. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -156,7 +156,7 @@ variable "private_dns_zone_id_queue" {
 }
 
 variable "private_dns_zone_id_container_registry" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -167,7 +167,7 @@ variable "private_dns_zone_id_container_registry" {
 }
 
 variable "private_dns_zone_id_synapse_portal" {
-  description = "Specifies the resource ID of the private DNS zone for Synapse PL Hub. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Synapse PL Hub. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -178,7 +178,7 @@ variable "private_dns_zone_id_synapse_portal" {
 }
 
 variable "private_dns_zone_id_key_vault" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
@@ -189,7 +189,7 @@ variable "private_dns_zone_id_key_vault" {
 }
 
 variable "private_dns_zone_id_databricks" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azue Policy."
+  description = "Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
   default     = ""
