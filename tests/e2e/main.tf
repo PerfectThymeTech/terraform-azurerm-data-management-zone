@@ -7,6 +7,7 @@ module "data_management_zone" {
 
   company_name                           = var.company_name
   location                               = var.location
+  location_purview                       = var.location_purview
   environment                            = var.environment
   prefix                                 = var.prefix
   tags                                   = var.tags

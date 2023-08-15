@@ -1,5 +1,6 @@
 company_name                           = "PerfectThymeTech"
 location                               = "northeurope"
+location_purview                       = "southcentralus"
 environment                            = "dev"
 prefix                                 = "mydmgmt"
 tags                                   = {}

@@ -1,6 +1,6 @@
 resource "azurerm_purview_account" "purview" {
   name                = "${local.prefix}-pview001"
-  location            = var.location
+  location            = var.location_purview
   resource_group_name = azurerm_resource_group.governance_rg.name
   tags                = var.tags
   identity {

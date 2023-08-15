@@ -10,6 +10,12 @@ variable "location" {
   sensitive   = false
 }
 
+variable "location_purview" {
+  description = "Specifies the location for Microsoft Purview. The location of Purview is bound to the Microsoft Entra ID location."
+  type        = string
+  sensitive   = false
+}
+
 variable "environment" {
   description = "Specifies the environment of the deployment."
   type        = string

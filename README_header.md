@@ -59,12 +59,13 @@ provider "azapi" {}
 
 # Declare locals for the module
 locals {
-  company_name   = "<my-company-name>"
-  location       = "northeurope"
-  prefix         = "<my-prefix>"
-  vnet_id        = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/virtualNetworks/<my-vnet-name>"
-  nsg_id         = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/networkSecurityGroups/<my-nsg-name>"
-  route_table_id = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/routeTables/<my-rt-name>"
+  company_name     = "<my-company-name>"
+  location         = "northeurope"
+  location_purview = "northeurope"
+  prefix           = "<my-prefix>"
+  vnet_id          = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/virtualNetworks/<my-vnet-name>"
+  nsg_id           = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/networkSecurityGroups/<my-nsg-name>"
+  route_table_id   = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/routeTables/<my-rt-name>"
 
   # If DNS A-records are deployed via Policy then you can also set these to an empty string (e.g. "") or remove them entirely
   private_dns_zone_id_namespace          = "/subscriptions/<my-subscription-id>/resourceGroups/<my-rg-name>/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net"
@@ -90,6 +91,7 @@ module "data_management_zone" {
 
   company_name                           = local.company_name
   location                               = local.location
+  location_purview                       = local.location_purview
   prefix                                 = local.prefix
   vnet_id                                = local.vnet_id
   nsg_id                                 = local.nsg_id
