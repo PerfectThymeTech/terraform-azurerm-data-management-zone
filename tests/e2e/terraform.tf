@@ -22,7 +22,8 @@ terraform {
     storage_account_name = "mycrpprdstg001"
     container_name       = "data-management-zone"
     key                  = "terraform.tfstate"
-    use_oidc             = true
+    use_azuread_auth     = true
+    # use_oidc             = true
   }
 }
 
