@@ -37,7 +37,7 @@ module "data_management_zone" {
   private_dns_zone_id_queue              = var.private_dns_zone_id_queue
   private_dns_zone_id_container_registry = var.private_dns_zone_id_container_registry
   private_dns_zone_id_synapse_portal     = var.private_dns_zone_id_synapse_portal
-  private_dns_zone_id_key_vault          = var.private_dns_zone_id_key_vault
+  private_dns_zone_id_vault              = var.private_dns_zone_id_vault
   private_dns_zone_id_databricks         = var.private_dns_zone_id_databricks
 
   # Customer-managed key variables
