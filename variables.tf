@@ -1,3 +1,4 @@
+# General variables
 variable "company_name" {
   description = "Specifies the name of the company."
   type        = string
@@ -44,6 +45,37 @@ variable "tags" {
   default     = {}
 }
 
+# Service variables
+variable "databricks_locations" {
+  description = "Specifies the list of locations where Databricks workspaces will be deployed."
+  type        = list(string)
+  sensitive   = false
+  default     = []
+}
+
+# HA/DR variables
+variable "zone_redundancy_enabled" {
+  description = "Specifies whether zone-redundancy should be enabled for all resources."
+  type        = bool
+  sensitive   = false
+  nullable    = false
+  default     = true
+}
+
+# Logging and monitoring variables
+variable "log_analytics_workspace_id" {
+  description = "Specifies the log analytics workspace used to configure diagnostics."
+  type        = string
+  sensitive   = false
+  nullable    = true
+  default     = null
+  validation {
+    condition     = var.log_analytics_workspace_id == null || length(try(split("/", var.log_analytics_workspace_id)), []) == 9
+    error_message = "Please specify a valid resource id."
+  }
+}
+
+# Network variables
 variable "vnet_id" {
   description = "Specifies the resource ID of the Vnet used for the Data Management Zone"
   type        = string
@@ -95,6 +127,7 @@ variable "subnet_cidr_ranges" {
   }
 }
 
+# DNS variables
 variable "private_dns_zone_id_namespace" {
   description = "Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azure Policy."
   type        = string
@@ -205,16 +238,25 @@ variable "private_dns_zone_id_databricks" {
   }
 }
 
-variable "purview_root_collection_admins" {
-  description = "Specifies the list of user object IDs that are assigned as collection admin to the root collection in Purview."
-  type        = list(string)
-  sensitive   = false
-  default     = []
-}
-
-variable "data_platform_subscription_ids" {
-  description = "Specifies the list of subscription IDs of your data platform."
-  type        = list(string)
-  sensitive   = false
-  default     = []
+# Customer-managed key variables
+variable "customer_managed_key" {
+  description = "Specifies the customer managed key configurations."
+  type = object({
+    key_vault_id                     = string,
+    key_vault_key_versionless_id     = string,
+    user_assigned_identity_id        = string,
+    user_assigned_identity_client_id = string,
+  })
+  sensitive = false
+  nullable  = true
+  default   = null
+  validation {
+    condition = alltrue([
+      var.customer_managed_key == null || length(split("/", try(var.customer_managed_key.key_vault_id, ""))) == 9,
+      var.customer_managed_key == null || startswith(try(var.customer_managed_key.key_vault_key_versionless_id, ""), "https://"),
+      var.customer_managed_key == null || length(split("/", try(var.customer_managed_key.user_assigned_identity_id, ""))) == 9,
+      var.customer_managed_key == null || length(try(var.customer_managed_key.user_assigned_identity_client_id, "")) >= 2,
+    ])
+    error_message = "Please specify a valid resource ID."
+  }
 }
