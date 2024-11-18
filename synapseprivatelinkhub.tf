@@ -8,6 +8,7 @@ module "synapse_private_link_hub" {
   location                           = var.location
   resource_group_name                = azurerm_resource_group.consumption_rg.name
   tags                               = var.tags
+  synapse_private_link_hub_name      = replace("${local.prefix}-synplh001", "-", "")
   diagnostics_configurations         = local.diagnostics_configurations
   subnet_id                          = azapi_resource.private_endpoint_subnet.id
   connectivity_delay_in_seconds      = local.connectivity_delay_in_seconds
