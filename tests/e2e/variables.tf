@@ -64,7 +64,7 @@ variable "log_analytics_workspace_id" {
   nullable    = true
   default     = null
   validation {
-    condition     = var.log_analytics_workspace_id == null || length(try(split("/", var.log_analytics_workspace_id)), []) == 9
+    condition     = var.log_analytics_workspace_id == null || length(try(split("/", var.log_analytics_workspace_id), [])) == 9
     error_message = "Please specify a valid resource id."
   }
 }
