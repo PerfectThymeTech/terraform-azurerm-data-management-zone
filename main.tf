@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "governance_rg" {
 }
 
 resource "azurerm_resource_group" "unity_rg" {
-  name     = "${local.prefix}-unity-rg"
+  name     = "${local.prefix}-consumption-adb-rg"
   location = var.location
   tags     = var.tags
 }
@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "container_rg" {
 }
 
 resource "azurerm_resource_group" "consumption_rg" {
-  name     = "${local.prefix}-consumption-rg"
+  name     = "${local.prefix}-consumption-syn-rg"
   location = var.location
   tags     = var.tags
 }
