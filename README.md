@@ -151,9 +151,9 @@ Version: main
 
 ### <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault)
 
-Source: ./modules/keyvault
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
 
-Version:
+Version: main
 
 ### <a name="module_synapse_private_link_hub"></a> [synapse\_private\_link\_hub](#module\_synapse\_private\_link\_hub)
 
