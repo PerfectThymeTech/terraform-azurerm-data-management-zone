@@ -119,15 +119,53 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.13)
 
-- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.5.0)
+- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~> 2.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.56.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
 
-- <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (>= 1.16.0)
+- <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.58)
+
+- <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Modules
 
-No modules.
+The following Modules are called:
+
+### <a name="module_container_registry"></a> [container\_registry](#module\_container\_registry)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry
+
+Version: main
+
+### <a name="module_databricks_access_connector"></a> [databricks\_access\_connector](#module\_databricks\_access\_connector)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity
+
+Version: main
+
+### <a name="module_databricks_workspace"></a> [databricks\_workspace](#module\_databricks\_workspace)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksworkspace
+
+Version: main
+
+### <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault)
+
+Source: ./modules/keyvault
+
+Version:
+
+### <a name="module_synapse_private_link_hub"></a> [synapse\_private\_link\_hub](#module\_synapse\_private\_link\_hub)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/synapseprivetlinkhub
+
+Version: main
+
+### <a name="module_user_assigned_identity"></a> [user\_assigned\_identity](#module\_user\_assigned\_identity)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity
+
+Version: main
 
 <!-- markdownlint-disable MD013 -->
 <!-- markdownlint-disable MD034 -->
@@ -144,12 +182,6 @@ Type: `string`
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location for all Azure resources.
-
-Type: `string`
-
-### <a name="input_location_purview"></a> [location\_purview](#input\_location\_purview)
-
-Description: Specifies the location for Microsoft Purview. The location of Purview is bound to the Microsoft Entra ID location.
 
 Type: `string`
 
@@ -181,9 +213,26 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_data_platform_subscription_ids"></a> [data\_platform\_subscription\_ids](#input\_data\_platform\_subscription\_ids)
+### <a name="input_customer_managed_key"></a> [customer\_managed\_key](#input\_customer\_managed\_key)
 
-Description: Specifies the list of subscription IDs of your data platform.
+Description: Specifies the customer managed key configurations.
+
+Type:
+
+```hcl
+object({
+    key_vault_id                     = string,
+    key_vault_key_versionless_id     = string,
+    user_assigned_identity_id        = string,
+    user_assigned_identity_client_id = string,
+  })
+```
+
+Default: `null`
+
+### <a name="input_databricks_locations"></a> [databricks\_locations](#input\_databricks\_locations)
+
+Description: Specifies the list of locations where Databricks workspaces will be deployed.
 
 Type: `list(string)`
 
@@ -196,6 +245,14 @@ Description: Specifies the environment of the deployment.
 Type: `string`
 
 Default: `"dev"`
+
+### <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id)
+
+Description: Specifies the log analytics workspace used to configure diagnostics.
+
+Type: `string`
+
+Default: `null`
 
 ### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
 
@@ -277,14 +334,6 @@ Type: `string`
 
 Default: `""`
 
-### <a name="input_purview_root_collection_admins"></a> [purview\_root\_collection\_admins](#input\_purview\_root\_collection\_admins)
-
-Description: Specifies the list of user object IDs that are assigned as collection admin to the root collection in Purview.
-
-Type: `list(string)`
-
-Default: `[]`
-
 ### <a name="input_subnet_cidr_ranges"></a> [subnet\_cidr\_ranges](#input\_subnet\_cidr\_ranges)
 
 Description: Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets.
@@ -311,41 +360,17 @@ Type: `map(string)`
 
 Default: `{}`
 
+### <a name="input_zone_redundancy_enabled"></a> [zone\_redundancy\_enabled](#input\_zone\_redundancy\_enabled)
+
+Description: Specifies whether zone-redundancy should be enabled for all resources.
+
+Type: `bool`
+
+Default: `true`
+
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_container_registry_id"></a> [container\_registry\_id](#output\_container\_registry\_id)
-
-Description: Specifies the id of the container registry.
-
-### <a name="output_databricks_access_connector_id"></a> [databricks\_access\_connector\_id](#output\_databricks\_access\_connector\_id)
-
-Description: Specifies the id of the databricks access connector.
-
-### <a name="output_databricks_datalake_id"></a> [databricks\_datalake\_id](#output\_databricks\_datalake\_id)
-
-Description: Specifies the id of the datalake used as a default for the databricks metastore.
-
-### <a name="output_databricks_metastore_id"></a> [databricks\_metastore\_id](#output\_databricks\_metastore\_id)
-
-Description: Specifies the id of the databricks metastore.
-
-### <a name="output_databricks_workspace_id"></a> [databricks\_workspace\_id](#output\_databricks\_workspace\_id)
-
-Description: Specifies the id of the databricks workspace.
-
-### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
-
-Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
-
-### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
-
-Description: Specifies the id of the Microsoft Purview account.
-
-### <a name="output_synapse_private_link_hub_id"></a> [synapse\_private\_link\_hub\_id](#output\_synapse\_private\_link\_hub\_id)
-
-Description: Specifies the id of the Azure synapse private link hub.
+No outputs.
 
 <!-- markdownlint-enable -->
 ## License
@@ -355,5 +380,4 @@ Description: Specifies the id of the Azure synapse private link hub.
 ## Contributing
 
 This project accepts public contributions. Please use issues, pull requests and the discussins feature in case you have any questions or want to enhance this module.
-
 <!-- END_TF_DOCS -->
