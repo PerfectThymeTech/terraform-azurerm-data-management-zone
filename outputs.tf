@@ -1,8 +1,26 @@
-# output "container_registry_id" {
-#   description = "Specifies the id of the container registry."
-#   value       = azurerm_container_registry.container_registry.id
-#   sensitive   = false
-# }
+output "container_registry_id" {
+  description = "Specifies the id of the container registry."
+  value       = module.container_registry.container_registry_id
+  sensitive   = false
+}
+
+output "key_vault_id" {
+  description = "Specifies the id of the Azure key vault provisioned for Microsoft Purview."
+  value       = module.key_vault.key_vault_id
+  sensitive   = false
+}
+
+output "purview_id" {
+  description = "Specifies the id of the Microsoft Purview account."
+  value       = module.purview_account.purview_account_id
+  sensitive   = false
+}
+
+output "synapse_private_link_hub_id" {
+  description = "Specifies the id of the Azure synapse private link hub."
+  value       = module.synapse_private_link_hub.synapse_private_link_hub_id
+  sensitive   = false
+}
 
 # output "databricks_workspace_id" {
 #   description = "Specifies the id of the databricks workspace."
@@ -19,29 +37,5 @@
 # output "databricks_metastore_id" {
 #   description = "Specifies the id of the databricks metastore."
 #   value       = databricks_metastore.metastore.id
-#   sensitive   = false
-# }
-
-# output "databricks_datalake_id" {
-#   description = "Specifies the id of the datalake used as a default for the databricks metastore."
-#   value       = azurerm_storage_account.datalake.id
-#   sensitive   = false
-# }
-
-# output "key_vault_id" {
-#   description = "Specifies the id of the Azure key vault provisioned for Microsoft Purview."
-#   value       = azurerm_storage_account.datalake.id
-#   sensitive   = false
-# }
-
-# output "purview_id" {
-#   description = "Specifies the id of the Microsoft Purview account."
-#   value       = azurerm_storage_account.datalake.id
-#   sensitive   = false
-# }
-
-# output "synapse_private_link_hub_id" {
-#   description = "Specifies the id of the Azure synapse private link hub."
-#   value       = azurerm_storage_account.datalake.id
 #   sensitive   = false
 # }
