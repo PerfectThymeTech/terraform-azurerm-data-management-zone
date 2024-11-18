@@ -5,16 +5,29 @@ module "data_management_zone" {
     azapi   = azapi
   }
 
-  company_name                           = var.company_name
-  location                               = var.location
-  location_purview                       = var.location_purview
-  environment                            = var.environment
-  prefix                                 = var.prefix
-  tags                                   = var.tags
-  vnet_id                                = var.vnet_id
-  nsg_id                                 = var.nsg_id
-  route_table_id                         = var.route_table_id
-  subnet_cidr_ranges                     = var.subnet_cidr_ranges
+  # General variables
+  company_name = var.company_name
+  location     = var.location
+  environment  = var.environment
+  prefix       = var.prefix
+  tags         = var.tags
+
+  # Service variables
+  databricks_locations = var.databricks_locations
+
+  # HA/DR variables
+  zone_redundancy_enabled = var.zone_redundancy_enabled
+
+  # Logging and monitoring variables
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  # Network variables
+  vnet_id            = var.vnet_id
+  nsg_id             = var.nsg_id
+  route_table_id     = var.route_table_id
+  subnet_cidr_ranges = var.subnet_cidr_ranges
+
+  # DNS variables
   private_dns_zone_id_namespace          = var.private_dns_zone_id_namespace
   private_dns_zone_id_purview_account    = var.private_dns_zone_id_purview_account
   private_dns_zone_id_purview_portal     = var.private_dns_zone_id_purview_portal
@@ -25,6 +38,7 @@ module "data_management_zone" {
   private_dns_zone_id_synapse_portal     = var.private_dns_zone_id_synapse_portal
   private_dns_zone_id_key_vault          = var.private_dns_zone_id_key_vault
   private_dns_zone_id_databricks         = var.private_dns_zone_id_databricks
-  purview_root_collection_admins         = var.purview_root_collection_admins
-  data_platform_subscription_ids         = var.data_platform_subscription_ids
+
+  # Customer-managed key variables
+  customer_managed_key = var.customer_managed_key
 }
