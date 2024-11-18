@@ -3,6 +3,7 @@ module "data_management_zone" {
   providers = {
     azurerm = azurerm
     azapi   = azapi
+    time    = time
   }
 
   # General variables
