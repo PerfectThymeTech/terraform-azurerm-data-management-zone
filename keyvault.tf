@@ -1,5 +1,5 @@
 module "key_vault" {
-  source = "./modules/keyvault"
+  source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault?ref=main"
   providers = {
     azurerm = azurerm
     time    = time
