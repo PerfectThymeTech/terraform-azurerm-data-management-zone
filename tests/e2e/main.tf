@@ -7,14 +7,17 @@ module "data_management_zone" {
   }
 
   # General variables
-  company_name = var.company_name
-  location     = var.location
-  environment  = var.environment
-  prefix       = var.prefix
-  tags         = var.tags
+  company_name         = var.company_name
+  location             = var.location
+  location_purview     = var.location_purview
+  locations_databricks = var.locations_databricks
+  environment          = var.environment
+  prefix               = var.prefix
+  tags                 = var.tags
 
   # Service variables
-  databricks_locations = var.databricks_locations
+  purview_enabled                        = var.purview_enabled
+  purview_account_root_collection_admins = var.purview_account_root_collection_admins
 
   # HA/DR variables
   zone_redundancy_enabled = var.zone_redundancy_enabled

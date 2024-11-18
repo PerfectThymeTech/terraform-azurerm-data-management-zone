@@ -1,12 +1,15 @@
 # General variables
-company_name = "PerfectThymeTech"
-location     = "northeurope"
-environment  = "dev"
-prefix       = "mydmgmt"
-tags         = {}
+company_name         = "PerfectThymeTech"
+location             = "northeurope"
+location_purview     = "westus"
+locations_databricks = ["northeurope", "westus", ]
+environment          = "dev"
+prefix               = "mydmgmt"
+tags                 = {}
 
 # Service variables
-databricks_locations = []
+purview_enabled                        = true
+purview_account_root_collection_admins = {}
 
 # HA/DR variables
 zone_redundancy_enabled = false

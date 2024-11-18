@@ -155,6 +155,12 @@ Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
 
 Version: main
 
+### <a name="module_purview_account"></a> [purview\_account](#module\_purview\_account)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/purview
+
+Version: main
+
 ### <a name="module_synapse_private_link_hub"></a> [synapse\_private\_link\_hub](#module\_synapse\_private\_link\_hub)
 
 Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/synapseprivetlinkhub
@@ -182,6 +188,12 @@ Type: `string`
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: Specifies the location for all Azure resources.
+
+Type: `string`
+
+### <a name="input_location_purview"></a> [location\_purview](#input\_location\_purview)
+
+Description: Specifies the location for Microsoft Purview. The location of Purview is bound to the Microsoft Entra ID location.
 
 Type: `string`
 
@@ -230,14 +242,6 @@ object({
 
 Default: `null`
 
-### <a name="input_databricks_locations"></a> [databricks\_locations](#input\_databricks\_locations)
-
-Description: Specifies the list of locations where Databricks workspaces will be deployed.
-
-Type: `list(string)`
-
-Default: `[]`
-
 ### <a name="input_environment"></a> [environment](#input\_environment)
 
 Description: Specifies the environment of the deployment.
@@ -245,6 +249,14 @@ Description: Specifies the environment of the deployment.
 Type: `string`
 
 Default: `"dev"`
+
+### <a name="input_locations_databricks"></a> [locations\_databricks](#input\_locations\_databricks)
+
+Description: Specifies the list of locations where Databricks workspaces will be deployed.
+
+Type: `list(string)`
+
+Default: `[]`
 
 ### <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id)
 
@@ -334,6 +346,28 @@ Type: `string`
 
 Default: `""`
 
+### <a name="input_purview_account_root_collection_admins"></a> [purview\_account\_root\_collection\_admins](#input\_purview\_account\_root\_collection\_admins)
+
+Description: Specifies the root collection admins of the Purview account.
+
+Type:
+
+```hcl
+map(object({
+    object_id = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_purview_enabled"></a> [purview\_enabled](#input\_purview\_enabled)
+
+Description: Specifies whether Purview should be enabled.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_subnet_cidr_ranges"></a> [subnet\_cidr\_ranges](#input\_subnet\_cidr\_ranges)
 
 Description: Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets.
@@ -370,7 +404,23 @@ Default: `true`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_container_registry_id"></a> [container\_registry\_id](#output\_container\_registry\_id)
+
+Description: Specifies the id of the container registry.
+
+### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+
+Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
+
+### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
+
+Description: Specifies the id of the Microsoft Purview account.
+
+### <a name="output_synapse_private_link_hub_id"></a> [synapse\_private\_link\_hub\_id](#output\_synapse\_private\_link\_hub\_id)
+
+Description: Specifies the id of the Azure synapse private link hub.
 
 <!-- markdownlint-enable -->
 ## License
