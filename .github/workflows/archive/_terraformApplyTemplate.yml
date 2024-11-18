@@ -12,27 +12,31 @@ on:
         required: true
         type: string
         description: "Specifies the terraform version."
+      node_version:
+        required: true
+        type: number
+        description: "Specifies the node version."
       working_directory:
         required: true
         type: string
         description: "Specifies the working directory."
-    secrets:
-      TENANT_ID:
+      tenant_id:
         required: true
+        type: string
         description: "Specifies the tenant id of the deployment."
+      subscription_id:
+        required: true
+        type: string
+        description: "Specifies the subscription id of the deployment."
+    secrets:
       CLIENT_ID:
-        required: true
-        description: "Specifies the client id."
-      CLIENT_SECRET:
-        required: true
-        description: "Specifies the client secret."
-      SUBSCRIPTION_ID:
         required: true
         description: "Specifies the client id."
 
 permissions:
   id-token: write
   contents: read
+  pull-requests: write
 
 jobs:
   deployment:
