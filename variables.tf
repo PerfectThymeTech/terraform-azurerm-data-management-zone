@@ -11,6 +11,19 @@ variable "location" {
   sensitive   = false
 }
 
+variable "location_purview" {
+  description = "Specifies the location for Microsoft Purview. The location of Purview is bound to the Microsoft Entra ID location."
+  type        = string
+  sensitive   = false
+}
+
+variable "locations_databricks" {
+  description = "Specifies the list of locations where Databricks workspaces will be deployed."
+  type        = list(string)
+  sensitive   = false
+  default     = []
+}
+
 variable "environment" {
   description = "Specifies the environment of the deployment."
   type        = string
@@ -40,11 +53,27 @@ variable "tags" {
 }
 
 # Service variables
-variable "databricks_locations" {
-  description = "Specifies the list of locations where Databricks workspaces will be deployed."
-  type        = list(string)
+variable "purview_enabled" {
+  description = "Specifies whether Purview should be enabled."
+  type        = bool
   sensitive   = false
-  default     = []
+  nullable    = false
+  default     = false
+}
+
+variable "purview_account_root_collection_admins" {
+  description = "Specifies the root collection admins of the Purview account."
+  type = map(object({
+    object_id = string
+  }))
+  sensitive = false
+  default   = {}
+  validation {
+    condition = alltrue([
+      length([for root_collection_admin in var.purview_account_root_collection_admins : true if length(root_collection_admin.object_id) <= 2]) <= 0
+    ])
+    error_message = "Please specify a valid object id."
+  }
 }
 
 # HA/DR variables
