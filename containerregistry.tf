@@ -17,9 +17,9 @@ module "container_registry" {
   container_registry_retention_policy_in_days  = 7
   container_registry_trust_policy_enabled      = false
   container_registry_zone_redundancy_enabled   = false
-  diagnostics_configurations                   = []
-  subnet_id                                    = var.subnet_id
-  connectivity_delay_in_seconds                = var.connectivity_delay_in_seconds
+  diagnostics_configurations                   = local.diagnostics_configurations
+  subnet_id                                    = azapi_resource.private_endpoint_subnet.id
+  connectivity_delay_in_seconds                = local.connectivity_delay_in_seconds
   private_dns_zone_id_container_registry       = var.private_dns_zone_id_container_registry
   customer_managed_key                         = null
 }

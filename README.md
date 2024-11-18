@@ -139,7 +139,7 @@ Version: main
 
 ### <a name="module_databricks_access_connector"></a> [databricks\_access\_connector](#module\_databricks\_access\_connector)
 
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector
 
 Version: main
 
