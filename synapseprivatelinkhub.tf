@@ -6,7 +6,7 @@ module "synapse_private_link_hub" {
   }
 
   location                           = var.location
-  resource_group_name                = azurerm_resource_group.consumption_rg.name
+  resource_group_name                = azurerm_resource_group.consumption_synapse_rg.name
   tags                               = var.tags
   synapse_private_link_hub_name      = replace("${local.prefix}-synplh001", "-", "")
   diagnostics_configurations         = local.diagnostics_configurations

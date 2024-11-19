@@ -28,5 +28,7 @@ locals {
     databricks_private_subnet = var.subnet_cidr_ranges.databricks_private_subnet != "" ? var.subnet_cidr_ranges.databricks_private_subnet : tostring(cidrsubnet(data.azurerm_virtual_network.virtual_network.address_space[0], 26 - tonumber(reverse(split("/", data.azurerm_virtual_network.virtual_network.address_space[0]))[0]), 1))
     databricks_public_subnet  = var.subnet_cidr_ranges.databricks_public_subnet != "" ? var.subnet_cidr_ranges.databricks_public_subnet : tostring(cidrsubnet(data.azurerm_virtual_network.virtual_network.address_space[0], 26 - tonumber(reverse(split("/", data.azurerm_virtual_network.virtual_network.address_space[0]))[0]), 2))
   }
-  connectivity_delay_in_seconds = 10
+  connectivity_delay_in_seconds  = 10
+  databricks_private_subnet_name = "DatabricksPrivateSubnet"
+  databricks_public_subnet_name  = "DatabricksPublicSubnet"
 }

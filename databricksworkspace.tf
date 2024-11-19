@@ -5,17 +5,20 @@ module "databricks_workspace" {
     time    = time
   }
 
-  location                                                                  = var.location
-  resource_group_name                                                       = azurerm_resource_group.unity_rg.name
+  for_each = toset(var.locations_databricks)
+
+  location                                                                  = each.value
+  location_private_endpoint                                                 = var.location
+  resource_group_name                                                       = azurerm_resource_group.consumption_adb_rg[each.key].name
   tags                                                                      = var.tags
-  databricks_workspace_name                                                 = "${local.prefix}-cnsmptn-dbw001"
-  databricks_workspace_access_connector_id                                  = module.databricks_access_connector.databricks_access_connector_id
+  databricks_workspace_name                                                 = "${local.prefix}-${each.value}-dbw001"
+  databricks_workspace_access_connector_id                                  = module.databricks_access_connector[each.key].databricks_access_connector_id
   databricks_workspace_machine_learning_workspace_id                        = null
-  databricks_workspace_virtual_network_id                                   = data.azurerm_virtual_network.virtual_network.id
-  databricks_workspace_private_subnet_name                                  = azapi_resource.databricks_private_subnet.name
-  databricks_workspace_private_subnet_network_security_group_association_id = azapi_resource.databricks_private_subnet.id
-  databricks_workspace_public_subnet_name                                   = azapi_resource.databricks_public_subnet.name
-  databricks_workspace_public_subnet_network_security_group_association_id  = azapi_resource.databricks_public_subnet.id
+  databricks_workspace_virtual_network_id                                   = azurerm_virtual_network.virtual_network_databricks[each.key].id
+  databricks_workspace_private_subnet_name                                  = local.databricks_private_subnet_name
+  databricks_workspace_private_subnet_network_security_group_association_id = "${azurerm_virtual_network.virtual_network_databricks[each.key].id}/subnets/${local.databricks_private_subnet_name}"
+  databricks_workspace_public_subnet_name                                   = local.databricks_public_subnet_name
+  databricks_workspace_public_subnet_network_security_group_association_id  = "${azurerm_virtual_network.virtual_network_databricks[each.key].id}/subnets/${local.databricks_public_subnet_name}"
   databricks_workspace_storage_account_sku_name                             = var.zone_redundancy_enabled ? "Standard_ZRS" : "Standard_LRS"
   databricks_workspace_browser_authentication_private_endpoint_enabled      = true
   diagnostics_configurations                                                = local.diagnostics_configurations
