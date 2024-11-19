@@ -151,35 +151,14 @@ variable "subnet_cidr_ranges" {
 }
 
 # DNS variables
-variable "private_dns_zone_id_namespace" {
-  description = "Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azure Policy."
+variable "private_dns_zone_id_purview_platform" {
+  description = "Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy."
   type        = string
   sensitive   = false
+  nullable    = false
   default     = ""
   validation {
-    condition     = var.private_dns_zone_id_namespace == "" || (length(split("/", var.private_dns_zone_id_namespace)) == 9 && endswith(var.private_dns_zone_id_namespace, "privatelink.servicebus.windows.net"))
-    error_message = "Please specify a valid resource ID for the private DNS Zone."
-  }
-}
-
-variable "private_dns_zone_id_purview_account" {
-  description = "Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azure Policy."
-  type        = string
-  sensitive   = false
-  default     = ""
-  validation {
-    condition     = var.private_dns_zone_id_purview_account == "" || (length(split("/", var.private_dns_zone_id_purview_account)) == 9 && endswith(var.private_dns_zone_id_purview_account, "privatelink.purview.azure.com"))
-    error_message = "Please specify a valid resource ID for the private DNS Zone."
-  }
-}
-
-variable "private_dns_zone_id_purview_portal" {
-  description = "Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azure Policy."
-  type        = string
-  sensitive   = false
-  default     = ""
-  validation {
-    condition     = var.private_dns_zone_id_purview_portal == "" || (length(split("/", var.private_dns_zone_id_purview_portal)) == 9 && endswith(var.private_dns_zone_id_purview_portal, "privatelink.purviewstudio.azure.com"))
+    condition     = var.private_dns_zone_id_purview_platform == "" || (length(split("/", var.private_dns_zone_id_purview_platform)) == 9 && endswith(var.private_dns_zone_id_purview_platform, "privatelink.purview-service.microsoft.com"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }
@@ -191,17 +170,6 @@ variable "private_dns_zone_id_blob" {
   default     = ""
   validation {
     condition     = var.private_dns_zone_id_blob == "" || (length(split("/", var.private_dns_zone_id_blob)) == 9 && endswith(var.private_dns_zone_id_blob, "privatelink.blob.core.windows.net"))
-    error_message = "Please specify a valid resource ID for the private DNS Zone."
-  }
-}
-
-variable "private_dns_zone_id_dfs" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy."
-  type        = string
-  sensitive   = false
-  default     = ""
-  validation {
-    condition     = var.private_dns_zone_id_dfs == "" || (length(split("/", var.private_dns_zone_id_dfs)) == 9 && endswith(var.private_dns_zone_id_dfs, "privatelink.dfs.core.windows.net"))
     error_message = "Please specify a valid resource ID for the private DNS Zone."
   }
 }

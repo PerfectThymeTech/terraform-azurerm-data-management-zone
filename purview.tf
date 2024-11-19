@@ -2,6 +2,8 @@ module "purview_account" {
   source = "github.com/PerfectThymeTech/terraform-azurerm-modules//modules/purview?ref=main"
   providers = {
     azurerm = azurerm
+    azapi   = azapi
+    time    = time
   }
 
   location                               = var.location_purview

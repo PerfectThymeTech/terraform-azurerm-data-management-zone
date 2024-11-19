@@ -32,11 +32,8 @@ module "data_management_zone" {
   subnet_cidr_ranges = var.subnet_cidr_ranges
 
   # DNS variables
-  private_dns_zone_id_namespace          = var.private_dns_zone_id_namespace
-  private_dns_zone_id_purview_account    = var.private_dns_zone_id_purview_account
-  private_dns_zone_id_purview_portal     = var.private_dns_zone_id_purview_portal
+  private_dns_zone_id_purview_platform   = var.private_dns_zone_id_purview_platform
   private_dns_zone_id_blob               = var.private_dns_zone_id_blob
-  private_dns_zone_id_dfs                = var.private_dns_zone_id_dfs
   private_dns_zone_id_queue              = var.private_dns_zone_id_queue
   private_dns_zone_id_container_registry = var.private_dns_zone_id_container_registry
   private_dns_zone_id_synapse_portal     = var.private_dns_zone_id_synapse_portal
