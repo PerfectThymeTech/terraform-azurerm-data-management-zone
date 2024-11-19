@@ -45,7 +45,7 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
       ]
     }
     private_endpoint_network_policies             = "Enabled"
-    private_link_service_network_policies_enabled = "Enabled"
+    private_link_service_network_policies_enabled = true
     route_table_id                                = data.azurerm_route_table.route_table.id
     security_group                                = data.azurerm_network_security_group.network_security_group.id
     service_endpoint_policy_ids                   = []
@@ -64,7 +64,7 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
       ]
     }
     private_endpoint_network_policies             = "Enabled"
-    private_link_service_network_policies_enabled = "Enabled"
+    private_link_service_network_policies_enabled = true
     route_table_id                                = data.azurerm_route_table.route_table.id
     security_group                                = data.azurerm_network_security_group.network_security_group.id
     service_endpoint_policy_ids                   = []
