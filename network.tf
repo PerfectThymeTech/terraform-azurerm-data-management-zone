@@ -22,6 +22,29 @@ resource "azapi_resource" "private_endpoint_subnet" {
   }
 }
 
+resource "azurerm_network_security_group" "network_security_group_databricks" {
+  for_each = toset(var.locations_databricks)
+
+  name                = "${local.prefix}-${each.value}-nsg001"
+  location            = each.value
+  resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
+  tags                = var.tags
+
+  security_rule = []
+}
+
+resource "azurerm_route_table" "route_table_databricks" {
+  for_each = toset(var.locations_databricks)
+
+  name                = "${local.prefix}-${each.value}-rt001"
+  location            = each.value
+  resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
+  tags                = var.tags
+
+  bgp_route_propagation_enabled = false
+  route                         = []
+}
+
 resource "azurerm_virtual_network" "virtual_network_databricks" {
   for_each = toset(var.locations_databricks)
 
@@ -49,8 +72,8 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     }
     private_endpoint_network_policies             = "Enabled"
     private_link_service_network_policies_enabled = true
-    route_table_id                                = data.azurerm_route_table.route_table.id
-    security_group                                = data.azurerm_network_security_group.network_security_group.id
+    route_table_id                                = azurerm_route_table.route_table_databricks[each.key].id
+    security_group                                = azurerm_network_security_group.network_security_group_databricks[each.key].id
     service_endpoint_policy_ids                   = []
     service_endpoints                             = []
   }
@@ -71,8 +94,8 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     }
     private_endpoint_network_policies             = "Enabled"
     private_link_service_network_policies_enabled = true
-    route_table_id                                = data.azurerm_route_table.route_table.id
-    security_group                                = data.azurerm_network_security_group.network_security_group.id
+    route_table_id                                = azurerm_route_table.route_table_databricks[each.key].id
+    security_group                                = azurerm_network_security_group.network_security_group_databricks[each.key].id
     service_endpoint_policy_ids                   = []
     service_endpoints                             = []
   }
