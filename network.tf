@@ -39,9 +39,9 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     delegation {
       name = "Microsoft.Databricks/workspaces"
       service_delegation = [
-          "Microsoft.Network/virtualNetworks/subnets/join/action",
-          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
       ]
     }
     private_endpoint_network_policies             = "Enabled"
@@ -58,9 +58,9 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     delegation {
       name = "Microsoft.Databricks/workspaces"
       service_delegation = [
-          "Microsoft.Network/virtualNetworks/subnets/join/action",
-          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
       ]
     }
     private_endpoint_network_policies             = "Enabled"
