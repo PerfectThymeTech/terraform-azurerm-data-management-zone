@@ -37,12 +37,15 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     address_prefixes                = ["10.0.0.0/26"]
     default_outbound_access_enabled = false
     delegation {
-      name = "Microsoft.Databricks/workspaces"
-      service_delegation = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action",
-        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
-      ]
+      name = "DatabricksDelegation"
+      service_delegation {
+        actions = [
+          "Microsoft.Network/virtualNetworks/subnets/join/action",
+          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        ]
+        name = "Microsoft.Databricks/workspaces"
+      }
     }
     private_endpoint_network_policies             = "Enabled"
     private_link_service_network_policies_enabled = true
@@ -56,12 +59,15 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     address_prefixes                = ["10.0.0.64/26"]
     default_outbound_access_enabled = false
     delegation {
-      name = "Microsoft.Databricks/workspaces"
-      service_delegation = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action",
-        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
-      ]
+      name = "DatabricksDelegation"
+      service_delegation {
+        actions = [
+          "Microsoft.Network/virtualNetworks/subnets/join/action",
+          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        ]
+        name = "Microsoft.Databricks/workspaces"
+      }
     }
     private_endpoint_network_policies             = "Enabled"
     private_link_service_network_policies_enabled = true
