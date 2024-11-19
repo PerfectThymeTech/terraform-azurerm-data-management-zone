@@ -1,11 +1,15 @@
 # Define script arguments
 [CmdletBinding()]
-param ()
+param (
+    [Parameter(Mandatory = $true)]
+    [String]
+    $Resource
+)
 
 $ErrorActionPreference = "Stop"
 
 # Get access token
-$accessToken = $(az account get-access-token --resource 2ff814a6-3304-4ab8-85cb-cd0e6f879c1d --query "accessToken" --output tsv)
+$accessToken = $(az account get-access-token --resource $Resource --query "accessToken" --output tsv)
 
 # Create result
 $res = @{
