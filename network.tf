@@ -30,7 +30,42 @@ resource "azurerm_network_security_group" "network_security_group_databricks" {
   resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
   tags                = var.tags
 
-  security_rule = []
+  security_rule {
+    name                       = "Allow-DatabricksWorkerToEventhub"
+    priority                   = 100
+    access                     = "Allow"
+    description                = "Allow Databricks Worker to Event Hub traffic."
+    direction                  = "Outbound"
+    protocol                   = "tcp"
+    destination_address_prefix = "EventHub"
+    destination_port_range     = "9093"
+    source_address_prefix      = "VirtualNetwork"
+    source_port_range          = "*"
+  }
+  security_rule {
+    name                       = "Allow-DatabricksWorkerToStorage"
+    priority                   = 100
+    access                     = "Allow"
+    description                = "Allow Databricks Worker to Storage traffic."
+    direction                  = "Outbound"
+    protocol                   = "tcp"
+    destination_address_prefix = "Storage"
+    destination_port_range     = "443"
+    source_address_prefix      = "VirtualNetwork"
+    source_port_range          = "*"
+  }
+  security_rule {
+    name                       = "Allow-DatabricksWorkerToSql"
+    priority                   = 100
+    access                     = "Allow"
+    description                = "Allow Databricks Worker to SQL traffic."
+    direction                  = "Outbound"
+    protocol                   = "tcp"
+    destination_address_prefix = "SQL"
+    destination_port_range     = "3306"
+    source_address_prefix      = "VirtualNetwork"
+    source_port_range          = "*"
+  }
 }
 
 resource "azurerm_route_table" "route_table_databricks" {
@@ -58,7 +93,7 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
   subnet {
     name                            = local.databricks_private_subnet_name
     address_prefixes                = ["10.0.0.0/26"]
-    default_outbound_access_enabled = false
+    default_outbound_access_enabled = true
     delegation {
       name = "DatabricksDelegation"
       service_delegation {
@@ -80,7 +115,7 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
   subnet {
     name                            = local.databricks_public_subnet_name
     address_prefixes                = ["10.0.0.64/26"]
-    default_outbound_access_enabled = false
+    default_outbound_access_enabled = true
     delegation {
       name = "DatabricksDelegation"
       service_delegation {
