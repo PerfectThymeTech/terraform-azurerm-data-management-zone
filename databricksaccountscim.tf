@@ -36,11 +36,11 @@ resource "azuread_application" "databricks_account_scim_application" {
     id                   = random_uuid.uuid.result
     value                = "User"
   }
-  description = "Databricks account SCIM application."
+  description                   = "Databricks account SCIM application."
   oauth2_post_response_required = false
   owners                        = [data.azuread_client_config.current.object_id]
   prevent_duplicate_names       = true
-  
+
 }
 
 resource "azuread_synchronization_secret" "synchronization" {
@@ -62,11 +62,11 @@ resource "azuread_synchronization_secret" "synchronization" {
   }
 
   credential {
-    key   = "SyncNotificationSettings"
+    key = "SyncNotificationSettings"
     value = jsonencode({
-      "Enabled" = "true"
+      "Enabled"                = "true"
       "DeleteThresholdEnabled" = false
-      "Recipients" = "notifyme@targetmail.com" //email to notify
+      "Recipients"             = "notifyme@targetmail.com" //email to notify
     })
   }
 }
