@@ -200,6 +200,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ inputs.subscription_id }}
       ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       ARM_USE_OIDC: true
+      TF_LOG: DEBUG
 
     steps:
       # Setup Node
