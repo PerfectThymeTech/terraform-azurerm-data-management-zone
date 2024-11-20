@@ -22,20 +22,20 @@ output "synapse_private_link_hub_id" {
   sensitive   = false
 }
 
-# output "databricks_workspace_id" {
-#   description = "Specifies the id of the databricks workspace."
-#   value       = azurerm_databricks_workspace.databricks.id
-#   sensitive   = false
-# }
+output "databricks_workspace_ids" {
+  description = "Specifies the ids of the databricks workspaces."
+  value       = [
+    for key, value in toset(var.var.locations_databricks):
+    module.databricks_workspace[key].databricks_workspace_id
+  ]
+  sensitive   = false
+}
 
-# output "databricks_access_connector_id" {
-#   description = "Specifies the id of the databricks access connector."
-#   value       = azurerm_databricks_access_connector.databricks_access_connector.id
-#   sensitive   = false
-# }
-
-# output "databricks_metastore_id" {
-#   description = "Specifies the id of the databricks metastore."
-#   value       = databricks_metastore.metastore.id
-#   sensitive   = false
-# }
+output "databricks_access_connector_id" {
+  description = "Specifies the ids of the databricks access connectors."
+  value       = [
+    for key, value in toset(var.var.locations_databricks):
+    module.databricks_access_connector[key].databricks_access_connector_id
+  ]
+  sensitive   = false
+}
