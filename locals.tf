@@ -31,4 +31,7 @@ locals {
   connectivity_delay_in_seconds  = 10
   databricks_private_subnet_name = "DatabricksPrivateSubnet"
   databricks_public_subnet_name  = "DatabricksPublicSubnet"
+
+  # Databricks locals
+  databricks_account_scim_secret_name = "scim-token"
 }

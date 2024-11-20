@@ -31,3 +31,9 @@ resource "azurerm_resource_group" "automation_rg" {
   location = var.location
   tags     = var.tags
 }
+
+resource "azurerm_resource_group" "scim_rg" {
+  name     = "${local.prefix}-scim-rg"
+  location = var.location
+  tags     = var.tags
+}
