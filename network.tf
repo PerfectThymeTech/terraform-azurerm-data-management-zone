@@ -30,41 +30,10 @@ resource "azurerm_network_security_group" "network_security_group_databricks" {
   resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
   tags                = var.tags
 
-  security_rule {
-    name                       = "Allow-DatabricksWorkerToEventhub"
-    priority                   = 100
-    access                     = "Allow"
-    description                = "Allow Databricks Worker to Event Hub traffic."
-    direction                  = "Outbound"
-    protocol                   = "Tcp"
-    destination_address_prefix = "EventHub"
-    destination_port_range     = "9093"
-    source_address_prefix      = "VirtualNetwork"
-    source_port_range          = "*"
-  }
-  security_rule {
-    name                       = "Allow-DatabricksWorkerToStorage"
-    priority                   = 110
-    access                     = "Allow"
-    description                = "Allow Databricks Worker to Storage traffic."
-    direction                  = "Outbound"
-    protocol                   = "Tcp"
-    destination_address_prefix = "Storage"
-    destination_port_range     = "443"
-    source_address_prefix      = "VirtualNetwork"
-    source_port_range          = "*"
-  }
-  security_rule {
-    name                       = "Allow-DatabricksWorkerToSql"
-    priority                   = 120
-    access                     = "Allow"
-    description                = "Allow Databricks Worker to SQL traffic."
-    direction                  = "Outbound"
-    protocol                   = "Tcp"
-    destination_address_prefix = "SQL"
-    destination_port_range     = "3306"
-    source_address_prefix      = "VirtualNetwork"
-    source_port_range          = "*"
+  lifecycle {
+    ignore_changes = [
+      security_rule,
+    ]
   }
 }
 
