@@ -33,7 +33,7 @@ resource "azuread_application" "databricks_account_scim_application" {
     description          = "Users can perform limited actions"
     display_name         = "User"
     enabled              = true
-    id                   = random_uuid.uuid.result
+    id                   = random_uuid.databricks_account_scim_uuid.result
     value                = "User"
   }
   description                   = "Databricks account SCIM application."
