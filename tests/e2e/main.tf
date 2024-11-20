@@ -18,6 +18,7 @@ module "data_management_zone" {
   # Service variables
   purview_enabled                        = var.purview_enabled
   purview_account_root_collection_admins = var.purview_account_root_collection_admins
+  databricks_account_id                  = var.databricks_account_id
 
   # HA/DR variables
   zone_redundancy_enabled = var.zone_redundancy_enabled

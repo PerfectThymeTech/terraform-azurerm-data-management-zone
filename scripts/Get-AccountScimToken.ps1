@@ -4,11 +4,11 @@ param (
     [Parameter(Mandatory = $true)]
     [String]
     $DatabricksAccountId,
-    
+
     [Parameter(Mandatory = $true)]
     [String]
     $KeyVaultName,
-    
+
     [Parameter(Mandatory = $false)]
     [String]
     $KeyVaultSecretName = "scim-token"

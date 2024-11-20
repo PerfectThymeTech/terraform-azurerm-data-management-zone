@@ -83,7 +83,7 @@ variable "databricks_account_id" {
   nullable    = false
   default     = ""
   validation {
-    condition = var.databricks_account_id == "" || length(var.databricks_account_id) > 2
+    condition     = var.databricks_account_id == "" || length(var.databricks_account_id) > 2
     error_message = "Please specify a valid databricks account id."
   }
 }

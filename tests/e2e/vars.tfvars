@@ -10,6 +10,7 @@ tags                 = {}
 # Service variables
 purview_enabled                        = true
 purview_account_root_collection_admins = {}
+databricks_account_id                  = "515f13c1-53bb-48fb-a2c9-75e3f5d943f5"
 
 # HA/DR variables
 zone_redundancy_enabled = false

@@ -76,6 +76,18 @@ variable "purview_account_root_collection_admins" {
   }
 }
 
+variable "databricks_account_id" {
+  description = "Specifies the id of the databricks account."
+  type        = string
+  sensitive   = false
+  nullable    = false
+  default     = ""
+  validation {
+    condition     = var.databricks_account_id == "" || length(var.databricks_account_id) > 2
+    error_message = "Please specify a valid databricks account id."
+  }
+}
+
 # HA/DR variables
 variable "zone_redundancy_enabled" {
   description = "Specifies whether zone-redundancy should be enabled for all resources."
