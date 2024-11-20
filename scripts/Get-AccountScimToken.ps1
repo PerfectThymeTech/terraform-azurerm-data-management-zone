@@ -39,8 +39,9 @@ try {
     $scimToken = $response.token_value
 }
 catch {
-    Write-Error "REST API to get synchronisation template failed"
-    throw "REST API call failed"
+    $message = "REST API call to rotate SCIM token failed"
+    Write-Error $message
+    throw $message
     exit 1
 }
 
