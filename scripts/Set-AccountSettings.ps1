@@ -10,8 +10,8 @@ param (
     $CompanyName,
 
     [Parameter(Mandatory = $false)]
-    [bool]
-    $EnableServerless = $true
+    [String]
+    $EnableServerless = "true"
 )
 
 # Configuration
@@ -19,6 +19,7 @@ $ErrorActionPreference = "Stop"
 
 # Variables
 $baseUrl = "https://accounts.azuredatabricks.net/api/2.0"
+$boolList = @("true", "false")
 
 function Get-AccessToken {
     <#
@@ -49,6 +50,8 @@ function Get-AccessToken {
 # Configure account name #
 ##########################
 if ($CompanyName) {
+    Write-Information "Configure account name"
+
     # Get access token
     $accessToken = Get-AccessToken
 
@@ -82,38 +85,41 @@ if ($CompanyName) {
 ########################
 # Configure serverless #
 ########################
+if ($boolList -contains $EnableServerless) {
+    Write-Information "Configure serverless settings"
 
-# Get access token
-$accessToken = Get-AccessToken
+    # Get access token
+    $accessToken = Get-AccessToken
 
-# Set account name
-$url = "${baseUrl}/settings-api/accounts/${DatabricksAccountId}/serverless_jobs_nb_enable"
-$headers = @{
-    'Content-Type'  = 'application/json'
-    'Authorization' = "Bearer ${accessToken}"
-}
-$body = @{
-    'setting_payload' = @{
-        'stored_value' = @{
-            'bool_val' = @{
-                'value' = $EnableServerless
+    # Set account name
+    $url = "${baseUrl}/settings-api/accounts/${DatabricksAccountId}/serverless_jobs_nb_enable"
+    $headers = @{
+        'Content-Type'  = 'application/json'
+        'Authorization' = "Bearer ${accessToken}"
+    }
+    $body = @{
+        'setting_payload' = @{
+            'stored_value' = @{
+                'bool_val' = @{
+                    'value' = $EnableServerless
+                }
             }
         }
+    } | ConvertTo-Json
+    $parameters = @{
+        'Uri'         = $url
+        'Method'      = 'Post'
+        'Headers'     = $headers
+        'Body'        = $body
+        'ContentType' = 'application/json'
     }
-} | ConvertTo-Json
-$parameters = @{
-    'Uri'         = $url
-    'Method'      = 'Post'
-    'Headers'     = $headers
-    'Body'        = $body
-    'ContentType' = 'application/json'
-}
-try {
-    $response = Invoke-RestMethod @parameters
-}
-catch {
-    $message = "REST API call to set account name failed"
-    Write-Error $message
-    throw $message
-    exit 1
+    try {
+        $response = Invoke-RestMethod @parameters
+    }
+    catch {
+        $message = "REST API call to set account name failed"
+        Write-Error $message
+        throw $message
+        exit 1
+    }
 }
