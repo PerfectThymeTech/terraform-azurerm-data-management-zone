@@ -2,7 +2,7 @@ resource "null_resource" "databricks_account_settings" {
   triggers = {
     company_name      = var.company_name
     enable_serverless = true
-    trigger_id        = 1
+    trigger_id        = 2
   }
 
   provisioner "local-exec" {

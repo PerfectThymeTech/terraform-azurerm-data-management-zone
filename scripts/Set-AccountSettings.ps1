@@ -50,7 +50,7 @@ function Get-AccessToken {
 # Configure account name #
 ##########################
 if ($CompanyName) {
-    Write-Information "Configure account name"
+    Write-Output "Configure account name"
 
     # Get access token
     $accessToken = Get-AccessToken
@@ -73,9 +73,11 @@ if ($CompanyName) {
     }
     try {
         $response = Invoke-RestMethod @parameters
+        Write-Output $response
     }
     catch {
         $message = "REST API call to set account name failed"
+        Write-Output $message
         Write-Error $message
         throw $message
         exit 1
@@ -86,7 +88,7 @@ if ($CompanyName) {
 # Configure serverless #
 ########################
 if ($boolList -contains $EnableServerless) {
-    Write-Information "Configure serverless settings"
+    Write-Output "Configure serverless settings"
 
     # Get access token
     $accessToken = Get-AccessToken
@@ -115,9 +117,11 @@ if ($boolList -contains $EnableServerless) {
     }
     try {
         $response = Invoke-RestMethod @parameters
+        Write-Output $response
     }
     catch {
         $message = "REST API call to set account name failed"
+        Write-Output $message
         Write-Error $message
         throw $message
         exit 1
