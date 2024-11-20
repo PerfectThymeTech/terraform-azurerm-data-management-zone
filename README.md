@@ -151,7 +151,13 @@ Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databrick
 
 Version: main
 
-### <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault)
+### <a name="module_key_vault_purview"></a> [key\_vault\_purview](#module\_key\_vault\_purview)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
+
+Version: main
+
+### <a name="module_key_vault_scim"></a> [key\_vault\_scim](#module\_key\_vault\_scim)
 
 Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
 
@@ -243,6 +249,14 @@ object({
 ```
 
 Default: `null`
+
+### <a name="input_databricks_account_id"></a> [databricks\_account\_id](#input\_databricks\_account\_id)
+
+Description: Specifies the id of the databricks account.
+
+Type: `string`
+
+Default: `""`
 
 ### <a name="input_environment"></a> [environment](#input\_environment)
 
@@ -388,9 +402,21 @@ The following outputs are exported:
 
 Description: Specifies the id of the container registry.
 
-### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+### <a name="output_databricks_access_connector_id"></a> [databricks\_access\_connector\_id](#output\_databricks\_access\_connector\_id)
+
+Description: Specifies the ids of the databricks access connectors.
+
+### <a name="output_databricks_workspace_ids"></a> [databricks\_workspace\_ids](#output\_databricks\_workspace\_ids)
+
+Description: Specifies the ids of the databricks workspaces.
+
+### <a name="output_key_vault_purview_id"></a> [key\_vault\_purview\_id](#output\_key\_vault\_purview\_id)
 
 Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
+
+### <a name="output_key_vault_scim_id"></a> [key\_vault\_scim\_id](#output\_key\_vault\_scim\_id)
+
+Description: Specifies the id of the Azure key vault provisioned for SCIM.
 
 ### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
 
