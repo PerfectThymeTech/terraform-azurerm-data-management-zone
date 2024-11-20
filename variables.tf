@@ -88,6 +88,20 @@ variable "databricks_account_id" {
   }
 }
 
+variable "databricks_account_scim_config" {
+  description = "Specifies the config for SCIM of the databricks account."
+  type = object({
+    enabled = bool
+    email   = string
+  })
+  sensitive = false
+  nullable  = false
+  default = {
+    enabled = false
+    email   = ""
+  }
+}
+
 # HA/DR variables
 variable "zone_redundancy_enabled" {
   description = "Specifies whether zone-redundancy should be enabled for all resources."
