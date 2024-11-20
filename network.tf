@@ -44,7 +44,7 @@ resource "azurerm_network_security_group" "network_security_group_databricks" {
   }
   security_rule {
     name                       = "Allow-DatabricksWorkerToStorage"
-    priority                   = 100
+    priority                   = 110
     access                     = "Allow"
     description                = "Allow Databricks Worker to Storage traffic."
     direction                  = "Outbound"
@@ -56,7 +56,7 @@ resource "azurerm_network_security_group" "network_security_group_databricks" {
   }
   security_rule {
     name                       = "Allow-DatabricksWorkerToSql"
-    priority                   = 100
+    priority                   = 120
     access                     = "Allow"
     description                = "Allow Databricks Worker to SQL traffic."
     direction                  = "Outbound"
