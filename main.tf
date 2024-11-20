@@ -6,8 +6,10 @@ resource "azurerm_resource_group" "governance_rg" {
   tags     = var.tags
 }
 
-resource "azurerm_resource_group" "unity_rg" {
-  name     = "${local.prefix}-unity-rg"
+resource "azurerm_resource_group" "consumption_adb_rg" {
+  for_each = toset(var.locations_databricks)
+
+  name     = "${local.prefix}-consumption-adb-${each.value}-rg"
   location = var.location
   tags     = var.tags
 }
@@ -18,14 +20,20 @@ resource "azurerm_resource_group" "container_rg" {
   tags     = var.tags
 }
 
-resource "azurerm_resource_group" "consumption_rg" {
-  name     = "${local.prefix}-consumption-rg"
+resource "azurerm_resource_group" "consumption_synapse_rg" {
+  name     = "${local.prefix}-consumption-syn-rg"
   location = var.location
   tags     = var.tags
 }
 
 resource "azurerm_resource_group" "automation_rg" {
   name     = "${local.prefix}-automation-rg"
+  location = var.location
+  tags     = var.tags
+}
+
+resource "azurerm_resource_group" "scim_rg" {
+  name     = "${local.prefix}-scim-rg"
   location = var.location
   tags     = var.tags
 }

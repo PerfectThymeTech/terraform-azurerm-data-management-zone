@@ -1,47 +1,47 @@
 output "container_registry_id" {
   description = "Specifies the id of the container registry."
-  value       = azurerm_container_registry.container_registry.id
+  value       = module.container_registry.container_registry_id
   sensitive   = false
 }
 
-output "databricks_workspace_id" {
-  description = "Specifies the id of the databricks workspace."
-  value       = azurerm_databricks_workspace.databricks.id
-  sensitive   = false
-}
-
-output "databricks_access_connector_id" {
-  description = "Specifies the id of the databricks access connector."
-  value       = azurerm_databricks_access_connector.databricks_access_connector.id
-  sensitive   = false
-}
-
-output "databricks_metastore_id" {
-  description = "Specifies the id of the databricks metastore."
-  value       = databricks_metastore.metastore.id
-  sensitive   = false
-}
-
-output "databricks_datalake_id" {
-  description = "Specifies the id of the datalake used as a default for the databricks metastore."
-  value       = azurerm_storage_account.datalake.id
-  sensitive   = false
-}
-
-output "key_vault_id" {
+output "key_vault_purview_id" {
   description = "Specifies the id of the Azure key vault provisioned for Microsoft Purview."
-  value       = azurerm_storage_account.datalake.id
+  value       = module.key_vault_purview.key_vault_id
+  sensitive   = false
+}
+
+output "key_vault_scim_id" {
+  description = "Specifies the id of the Azure key vault provisioned for SCIM."
+  value       = module.key_vault_scim.key_vault_id
   sensitive   = false
 }
 
 output "purview_id" {
   description = "Specifies the id of the Microsoft Purview account."
-  value       = azurerm_storage_account.datalake.id
+  value       = module.purview_account.purview_account_id
   sensitive   = false
 }
 
 output "synapse_private_link_hub_id" {
   description = "Specifies the id of the Azure synapse private link hub."
-  value       = azurerm_storage_account.datalake.id
+  value       = module.synapse_private_link_hub.synapse_private_link_hub_id
   sensitive   = false
+}
+
+output "databricks_workspace_ids" {
+  description = "Specifies the ids of the databricks workspaces."
+  value = [
+    for key, value in toset(var.locations_databricks) :
+    module.databricks_workspace[key].databricks_workspace_id
+  ]
+  sensitive = false
+}
+
+output "databricks_access_connector_id" {
+  description = "Specifies the ids of the databricks access connectors."
+  value = [
+    for key, value in toset(var.locations_databricks) :
+    module.databricks_access_connector[key].databricks_access_connector_id
+  ]
+  sensitive = false
 }

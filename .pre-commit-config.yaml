@@ -22,7 +22,7 @@ repos:
         language: system
         pass_filenames: false
   - repo: https://github.com/terraform-docs/terraform-docs
-    rev: v0.16.0
+    rev: v0.17.0
     hooks:
       - id: terraform-docs-go
         args: ["-c", "./.terraform-docs.yml", "./"]

@@ -119,15 +119,67 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=0.13)
 
-- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (>= 1.5.0)
+- <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~> 2.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (>= 3.56.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
 
-- <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (>= 1.16.0)
+- <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.58)
+
+- <a name="requirement_external"></a> [external](#requirement\_external) (~> 2.3)
+
+- <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Modules
 
-No modules.
+The following Modules are called:
+
+### <a name="module_container_registry"></a> [container\_registry](#module\_container\_registry)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry
+
+Version: main
+
+### <a name="module_databricks_access_connector"></a> [databricks\_access\_connector](#module\_databricks\_access\_connector)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector
+
+Version: main
+
+### <a name="module_databricks_workspace"></a> [databricks\_workspace](#module\_databricks\_workspace)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksworkspace
+
+Version: main
+
+### <a name="module_key_vault_purview"></a> [key\_vault\_purview](#module\_key\_vault\_purview)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
+
+Version: main
+
+### <a name="module_key_vault_scim"></a> [key\_vault\_scim](#module\_key\_vault\_scim)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
+
+Version: main
+
+### <a name="module_purview_account"></a> [purview\_account](#module\_purview\_account)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/purview
+
+Version: main
+
+### <a name="module_synapse_private_link_hub"></a> [synapse\_private\_link\_hub](#module\_synapse\_private\_link\_hub)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/synapseprivetlinkhub
+
+Version: main
+
+### <a name="module_user_assigned_identity"></a> [user\_assigned\_identity](#module\_user\_assigned\_identity)
+
+Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity
+
+Version: main
 
 <!-- markdownlint-disable MD013 -->
 <!-- markdownlint-disable MD034 -->
@@ -181,13 +233,30 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_data_platform_subscription_ids"></a> [data\_platform\_subscription\_ids](#input\_data\_platform\_subscription\_ids)
+### <a name="input_customer_managed_key"></a> [customer\_managed\_key](#input\_customer\_managed\_key)
 
-Description: Specifies the list of subscription IDs of your data platform.
+Description: Specifies the customer managed key configurations.
 
-Type: `list(string)`
+Type:
 
-Default: `[]`
+```hcl
+object({
+    key_vault_id                     = string,
+    key_vault_key_versionless_id     = string,
+    user_assigned_identity_id        = string,
+    user_assigned_identity_client_id = string,
+  })
+```
+
+Default: `null`
+
+### <a name="input_databricks_account_id"></a> [databricks\_account\_id](#input\_databricks\_account\_id)
+
+Description: Specifies the id of the databricks account.
+
+Type: `string`
+
+Default: `""`
 
 ### <a name="input_environment"></a> [environment](#input\_environment)
 
@@ -196,6 +265,22 @@ Description: Specifies the environment of the deployment.
 Type: `string`
 
 Default: `"dev"`
+
+### <a name="input_locations_databricks"></a> [locations\_databricks](#input\_locations\_databricks)
+
+Description: Specifies the list of locations where Databricks workspaces will be deployed.
+
+Type: `list(string)`
+
+Default: `[]`
+
+### <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id)
+
+Description: Specifies the log analytics workspace used to configure diagnostics.
+
+Type: `string`
+
+Default: `null`
 
 ### <a name="input_private_dns_zone_id_blob"></a> [private\_dns\_zone\_id\_blob](#input\_private\_dns\_zone\_id\_blob)
 
@@ -221,41 +306,9 @@ Type: `string`
 
 Default: `""`
 
-### <a name="input_private_dns_zone_id_dfs"></a> [private\_dns\_zone\_id\_dfs](#input\_private\_dns\_zone\_id\_dfs)
-
-Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy.
-
-Type: `string`
-
-Default: `""`
-
-### <a name="input_private_dns_zone_id_key_vault"></a> [private\_dns\_zone\_id\_key\_vault](#input\_private\_dns\_zone\_id\_key\_vault)
+### <a name="input_private_dns_zone_id_purview_platform"></a> [private\_dns\_zone\_id\_purview\_platform](#input\_private\_dns\_zone\_id\_purview\_platform)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
-
-Type: `string`
-
-Default: `""`
-
-### <a name="input_private_dns_zone_id_namespace"></a> [private\_dns\_zone\_id\_namespace](#input\_private\_dns\_zone\_id\_namespace)
-
-Description: Specifies the resource ID of the private DNS zone for the EventHub namespace. Not required if DNS A-records get created via Azure Policy.
-
-Type: `string`
-
-Default: `""`
-
-### <a name="input_private_dns_zone_id_purview_account"></a> [private\_dns\_zone\_id\_purview\_account](#input\_private\_dns\_zone\_id\_purview\_account)
-
-Description: Specifies the resource ID of the private DNS zone for the Purview account. Not required if DNS A-records get created via Azure Policy.
-
-Type: `string`
-
-Default: `""`
-
-### <a name="input_private_dns_zone_id_purview_portal"></a> [private\_dns\_zone\_id\_purview\_portal](#input\_private\_dns\_zone\_id\_purview\_portal)
-
-Description: Specifies the resource ID of the private DNS zone for the Purview portal. Not required if DNS A-records get created via Azure Policy.
 
 Type: `string`
 
@@ -277,13 +330,35 @@ Type: `string`
 
 Default: `""`
 
-### <a name="input_purview_root_collection_admins"></a> [purview\_root\_collection\_admins](#input\_purview\_root\_collection\_admins)
+### <a name="input_private_dns_zone_id_vault"></a> [private\_dns\_zone\_id\_vault](#input\_private\_dns\_zone\_id\_vault)
 
-Description: Specifies the list of user object IDs that are assigned as collection admin to the root collection in Purview.
+Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
 
-Type: `list(string)`
+Type: `string`
 
-Default: `[]`
+Default: `""`
+
+### <a name="input_purview_account_root_collection_admins"></a> [purview\_account\_root\_collection\_admins](#input\_purview\_account\_root\_collection\_admins)
+
+Description: Specifies the root collection admins of the Purview account.
+
+Type:
+
+```hcl
+map(object({
+    object_id = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_purview_enabled"></a> [purview\_enabled](#input\_purview\_enabled)
+
+Description: Specifies whether Purview should be enabled.
+
+Type: `bool`
+
+Default: `false`
 
 ### <a name="input_subnet_cidr_ranges"></a> [subnet\_cidr\_ranges](#input\_subnet\_cidr\_ranges)
 
@@ -311,6 +386,14 @@ Type: `map(string)`
 
 Default: `{}`
 
+### <a name="input_zone_redundancy_enabled"></a> [zone\_redundancy\_enabled](#input\_zone\_redundancy\_enabled)
+
+Description: Specifies whether zone-redundancy should be enabled for all resources.
+
+Type: `bool`
+
+Default: `true`
+
 ## Outputs
 
 The following outputs are exported:
@@ -321,23 +404,19 @@ Description: Specifies the id of the container registry.
 
 ### <a name="output_databricks_access_connector_id"></a> [databricks\_access\_connector\_id](#output\_databricks\_access\_connector\_id)
 
-Description: Specifies the id of the databricks access connector.
+Description: Specifies the ids of the databricks access connectors.
 
-### <a name="output_databricks_datalake_id"></a> [databricks\_datalake\_id](#output\_databricks\_datalake\_id)
+### <a name="output_databricks_workspace_ids"></a> [databricks\_workspace\_ids](#output\_databricks\_workspace\_ids)
 
-Description: Specifies the id of the datalake used as a default for the databricks metastore.
+Description: Specifies the ids of the databricks workspaces.
 
-### <a name="output_databricks_metastore_id"></a> [databricks\_metastore\_id](#output\_databricks\_metastore\_id)
-
-Description: Specifies the id of the databricks metastore.
-
-### <a name="output_databricks_workspace_id"></a> [databricks\_workspace\_id](#output\_databricks\_workspace\_id)
-
-Description: Specifies the id of the databricks workspace.
-
-### <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id)
+### <a name="output_key_vault_purview_id"></a> [key\_vault\_purview\_id](#output\_key\_vault\_purview\_id)
 
 Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
+
+### <a name="output_key_vault_scim_id"></a> [key\_vault\_scim\_id](#output\_key\_vault\_scim\_id)
+
+Description: Specifies the id of the Azure key vault provisioned for SCIM.
 
 ### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
 
@@ -355,5 +434,4 @@ Description: Specifies the id of the Azure synapse private link hub.
 ## Contributing
 
 This project accepts public contributions. Please use issues, pull requests and the discussins feature in case you have any questions or want to enhance this module.
-
 <!-- END_TF_DOCS -->
