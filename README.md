@@ -121,11 +121,13 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~> 2.0)
 
+- <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) (~> 2.42)
+
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
 
 - <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.58)
 
-- <a name="requirement_external"></a> [external](#requirement\_external) (~> 2.3)
+- <a name="requirement_random"></a> [random](#requirement\_random) (~> 3.6)
 
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
@@ -257,6 +259,28 @@ Description: Specifies the id of the databricks account.
 Type: `string`
 
 Default: `""`
+
+### <a name="input_databricks_account_scim_config"></a> [databricks\_account\_scim\_config](#input\_databricks\_account\_scim\_config)
+
+Description: Specifies the config for SCIM of the databricks account.
+
+Type:
+
+```hcl
+object({
+    enabled = bool
+    email   = string
+  })
+```
+
+Default:
+
+```json
+{
+  "email": "",
+  "enabled": false
+}
+```
 
 ### <a name="input_environment"></a> [environment](#input\_environment)
 
