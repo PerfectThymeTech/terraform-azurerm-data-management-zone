@@ -61,13 +61,13 @@ resource "azuread_synchronization_secret" "synchronization" {
     value = "false"
   }
 
-  credential {
-    key = "SyncNotificationSettings"
-    value = jsonencode({
-      "Enabled"                             = "true"
-      "DeleteThresholdEnabled"              = false
-      "HumanResourcesLookaheadQueryEnabled" = false
-      "Recipients"                          = "notifyme@targetmail.com" # email to notify
-    })
-  }
+  # credential {
+  #   key = "SyncNotificationSettings"
+  #   value = jsonencode({
+  #     "Enabled"                             = "true"
+  #     "DeleteThresholdEnabled"              = false
+  #     "HumanResourcesLookaheadQueryEnabled" = false
+  #     "Recipients"                          = "notifyme@targetmail.com" # email to notify
+  #   })
+  # }
 }
