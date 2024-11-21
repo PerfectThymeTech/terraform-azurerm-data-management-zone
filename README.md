@@ -369,9 +369,7 @@ Type:
 ```hcl
 object(
     {
-      private_endpoint_subnet   = optional(string, "")
-      databricks_private_subnet = optional(string, "")
-      databricks_public_subnet  = optional(string, "")
+      private_endpoint_subnet = optional(string, "")
     }
   )
 ```

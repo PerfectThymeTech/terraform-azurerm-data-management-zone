@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "network_security_group_databricks" {
 
   name                = "${local.prefix}-${each.value}-nsg001"
   location            = each.value
-  resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
+  resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
   lifecycle {
@@ -42,7 +42,7 @@ resource "azurerm_route_table" "route_table_databricks" {
 
   name                = "${local.prefix}-${each.value}-rt001"
   location            = each.value
-  resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
+  resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
   bgp_route_propagation_enabled = false
@@ -54,7 +54,7 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
 
   name                = "${local.prefix}-${each.value}-vnet001"
   location            = each.value
-  resource_group_name = azurerm_resource_group.consumption_adb_rg[each.key].name
+  resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
   address_space = ["10.0.0.0/20"]

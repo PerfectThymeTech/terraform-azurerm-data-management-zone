@@ -9,7 +9,7 @@ module "databricks_workspace" {
 
   location                                                                  = each.value
   location_private_endpoint                                                 = var.location
-  resource_group_name                                                       = azurerm_resource_group.consumption_adb_rg[each.key].name
+  resource_group_name                                                       = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                                                                      = var.tags
   databricks_workspace_name                                                 = "${local.prefix}-${each.value}-dbw001"
   databricks_workspace_access_connector_id                                  = module.databricks_access_connector[each.key].databricks_access_connector_id
