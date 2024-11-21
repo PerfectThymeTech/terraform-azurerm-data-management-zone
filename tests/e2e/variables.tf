@@ -145,9 +145,7 @@ variable "subnet_cidr_ranges" {
   description = "Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets."
   type = object(
     {
-      private_endpoint_subnet   = optional(string, "")
-      databricks_private_subnet = optional(string, "")
-      databricks_public_subnet  = optional(string, "")
+      private_endpoint_subnet = optional(string, "")
     }
   )
   sensitive = false
@@ -155,8 +153,6 @@ variable "subnet_cidr_ranges" {
   validation {
     condition = alltrue([
       var.subnet_cidr_ranges.private_endpoint_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.private_endpoint_subnet), "invalid") != "invalid",
-      var.subnet_cidr_ranges.databricks_private_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.databricks_private_subnet), "invalid") != "invalid",
-      var.subnet_cidr_ranges.databricks_public_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.databricks_public_subnet), "invalid") != "invalid",
     ])
     error_message = "Please specify a valid CIDR range for all subnets."
   }
