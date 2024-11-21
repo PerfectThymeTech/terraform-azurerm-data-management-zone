@@ -26,7 +26,7 @@ locals {
   subnet_cidr_ranges = {
     private_endpoint_subnet = var.subnet_cidr_ranges.private_endpoint_subnet != "" ? var.subnet_cidr_ranges.private_endpoint_subnet : tostring(cidrsubnet(data.azurerm_virtual_network.virtual_network.address_space[0], 27 - tonumber(reverse(split("/", data.azurerm_virtual_network.virtual_network.address_space[0]))[0]), 0))
   }
-  connectivity_delay_in_seconds  = 10
+  connectivity_delay_in_seconds  = 30
   databricks_private_subnet_name = "DatabricksPrivateSubnet"
   databricks_public_subnet_name  = "DatabricksPublicSubnet"
 
