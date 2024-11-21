@@ -64,9 +64,10 @@ resource "azuread_synchronization_secret" "synchronization" {
   credential {
     key = "SyncNotificationSettings"
     value = jsonencode({
-      "Enabled"                = "true"
-      "DeleteThresholdEnabled" = false
-      "Recipients"             = "notifyme@targetmail.com" //email to notify
+      "Enabled"                             = "true"
+      "DeleteThresholdEnabled"              = false
+      "HumanResourcesLookaheadQueryEnabled" = false
+      "Recipients"                          = "notifyme@targetmail.com" # email to notify
     })
   }
 }
