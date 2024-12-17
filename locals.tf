@@ -14,5 +14,5 @@ locals {
   customer_managed_key = null
 
   # Network locals
-  connectivity_delay_in_seconds  = 30
+  connectivity_delay_in_seconds = 30
 }

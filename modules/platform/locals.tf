@@ -51,12 +51,12 @@ locals {
 
   # DNS link locals
   private_dns_zone_virtual_network_links = merge([
-    for location in var.locations_databricks: {
-      for name in local.private_dns_zone_names:
-        "${location}-${replace(name, ".", "-")}" => {
-          location_databricks = location
-          private_dns_zone_name = name
-        }
+    for location in var.locations_databricks : {
+      for name in local.private_dns_zone_names :
+      "${location}-${replace(name, ".", "-")}" => {
+        location_databricks   = location
+        private_dns_zone_name = name
+      }
     }
   ])
 }

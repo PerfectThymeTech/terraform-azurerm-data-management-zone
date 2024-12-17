@@ -23,7 +23,7 @@ variable "locations_databricks" {
   sensitive   = false
   default     = []
   validation {
-    condition = length(var.locations_databricks) > 0
+    condition     = length(var.locations_databricks) > 0
     error_message = "Please provide at least one databricks location"
   }
 }
