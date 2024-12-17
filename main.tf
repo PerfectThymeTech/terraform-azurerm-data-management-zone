@@ -24,10 +24,9 @@ module "datamanagement" {
   source = "./modules/datamanagement"
 
   providers = {
-    azurerm  = azurerm
-    azapi    = azapi
-    time     = time
-    external = external
+    azurerm = azurerm
+    azapi   = azapi
+    time    = time
   }
 
   # General variables
