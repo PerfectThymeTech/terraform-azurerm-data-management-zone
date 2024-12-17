@@ -18,7 +18,7 @@ output "key_vault_scim_id" {
 
 output "purview_id" {
   description = "Specifies the id of the Microsoft Purview account."
-  value       = var.purview_enabled ? one(module.purview_account["*"].purview_account_id) : ""
+  value       = var.purview_enabled ? one(module.purview_account[*].purview_account_id) : ""
   sensitive   = false
 }
 
