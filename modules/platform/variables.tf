@@ -69,7 +69,7 @@ variable "subnet_cidr_range_private_endpoints" {
   type        = string
   sensitive   = false
   validation {
-    condition     = try(cidrnetmask(var.subnet_cidr_range_storage), "invalid") != "invalid"
+    condition     = try(cidrnetmask(var.subnet_cidr_range_private_endpoints), "invalid") != "invalid"
     error_message = "Please specify a valid CIDR range for the subnet."
   }
 }
