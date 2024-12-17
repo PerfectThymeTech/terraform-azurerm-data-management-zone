@@ -10,8 +10,8 @@ provider "databricks" {
 
 provider "databricks" {
   azure_environment           = "public"
-  azure_workspace_resource_id = module.databricks_workspace.databricks_workspace_id
-  host                        = module.databricks_workspace.databricks_workspace_workspace_url
+  azure_workspace_resource_id = module.databricks_workspace["northeurope"].databricks_workspace_id
+  host                        = module.databricks_workspace["northeurope"].databricks_workspace_workspace_url
   http_timeout_seconds        = 60
   rate_limit                  = 15
   skip_verify                 = false
