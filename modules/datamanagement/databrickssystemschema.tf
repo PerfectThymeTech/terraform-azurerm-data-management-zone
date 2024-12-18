@@ -1,12 +1,10 @@
 resource "time_sleep" "sleep_databricks_workspace" {
   for_each = toset(var.locations_databricks)
 
-  triggers        = {}
+  triggers = {
+    databricks_workspace_completed = module.databricks_workspace[each.key].databricks_workspace_completed
+  }
   create_duration = "30s"
-
-  depends_on = [
-    module.databricks_workspace[each.key].databricks_workspace_completed
-  ]
 }
 
 resource "null_resource" "system_schema" {
