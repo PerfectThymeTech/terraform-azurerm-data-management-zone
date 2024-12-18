@@ -50,6 +50,8 @@ $parameters = @{
 }
 try {
     $responseGetSystemSchemas = Invoke-RestMethod @parameters
+    $schemas = $responseGetSystemSchemas.schemas | ConvertTo-Json
+    Write-Host $schemas
 }
 catch {
     $message = "REST API call to get system schemas failed"
@@ -86,7 +88,7 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
             exit 1
         }
     }
-    elseif ($systemSchema.state -eq "EnableCompleted") {
+    elseif ($systemSchema.state -eq "ENABLE_COMPLETED") {
         Write-Host "System schema '${systemSchema.schema}' is already enabled in metastore '${currentMetastoreId}'"
     }
     else {
