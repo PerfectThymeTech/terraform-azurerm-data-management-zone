@@ -55,6 +55,7 @@ locals {
       for key, value in local.private_dns_zone_names :
       "${location}-${key}" => {
         location_databricks   = location
+        private_dns_zone_key  = key
         private_dns_zone_name = value
       }
     }
