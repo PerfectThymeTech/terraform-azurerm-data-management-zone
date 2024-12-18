@@ -22,7 +22,9 @@ log_analytics_workspace_id = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d2
 vnet_id            = "/subscriptions/660ed196-9d05-44fc-b902-0c11ca014bd6/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/virtualNetworks/spoke-ptt-dev-vnet001"
 nsg_id             = "/subscriptions/660ed196-9d05-44fc-b902-0c11ca014bd6/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/networkSecurityGroups/ptt-dev-default-nsg001"
 route_table_id     = "/subscriptions/660ed196-9d05-44fc-b902-0c11ca014bd6/resourceGroups/ptt-dev-networking-rg/providers/Microsoft.Network/routeTables/ptt-dev-default-rt001"
-subnet_cidr_ranges = {}
+subnet_cidr_ranges = {
+  private_endpoint_subnet = "10.1.0.0/24"
+}
 
 # DNS variables
 private_dns_zone_id_purview_platform   = "/subscriptions/e82c5267-9dc4-4f45-ac13-abdd5e130d27/resourceGroups/ptt-dev-privatedns-rg/providers/Microsoft.Network/privateDnsZones/privatelink.purview-service.microsoft.com"
