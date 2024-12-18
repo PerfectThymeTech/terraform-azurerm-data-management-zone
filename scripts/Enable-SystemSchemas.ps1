@@ -62,9 +62,12 @@ catch {
 
 # Enable system schemas
 foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
-    if ($systemSchema.state -eq "AVAILABLE") {
+    $systemSchemaState = $systemSchema.state
+    $systemSchemaName = $systemSchema.schema
+
+    if ($systemSchemaState -eq "AVAILABLE") {
         # Enable system schema
-        $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchema.schema}"
+        $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchemaName}"
         $headers = @{
             'Content-Type'  = 'application/json'
             'Authorization' = "Bearer ${accessToken}"
@@ -79,7 +82,7 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
         }
         try {
             _ = Invoke-RestMethod @parameters
-            Write-Host "Successfully enabled system schema '${systemSchema.schema}' in metastore ${currentMetastoreId}"
+            Write-Host "Successfully enabled system schema '${$systemSchemaName}' in metastore ${currentMetastoreId}"
         }
         catch {
             $message = "REST API call to enable system schema failed"
@@ -88,10 +91,10 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
             exit 1
         }
     }
-    elseif ($systemSchema.state -eq "ENABLE_COMPLETED") {
-        Write-Host "System schema '${systemSchema.schema}' is already enabled in metastore '${currentMetastoreId}'"
+    elseif ($systemSchemaState -eq "ENABLE_COMPLETED") {
+        Write-Host "System schema '${systemSchemaName}' is already enabled in metastore '${currentMetastoreId}'"
     }
     else {
-        Write-Host "System schema '${systemSchema.schema}' cannot be enabled in metastore '${currentMetastoreId}' as it is in state '${systemSchema.state}'"
+        Write-Host "System schema '${systemSchemaName}' cannot be enabled in metastore '${currentMetastoreId}' as it is in state '${systemSchemaState}'"
     }
 }
