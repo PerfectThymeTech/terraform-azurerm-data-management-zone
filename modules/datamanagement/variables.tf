@@ -128,13 +128,13 @@ variable "subnet_id_private_endpoints" {
 variable "subnet_ids_databricks" {
   description = "Specifies the ids of the subnets for the databricks workspaces."
   type = map(object({
-    vnet_id                        = string
-    subnet_databricks_private_name = string
-    subnet_databricks_private_id   = string
-    subnet_databricks_public_name  = string
-    subnet_databricks_public_id    = string
+    vnet_id                                 = string
+    subnet_databricks_private_name          = string
+    subnet_databricks_private_id            = string
+    subnet_databricks_public_name           = string
+    subnet_databricks_public_id             = string
     subnet_databricks_private_endpoint_name = string
-    subnet_databricks_private_endpoint_id = string
+    subnet_databricks_private_endpoint_id   = string
   }))
   sensitive = false
   default   = {}
