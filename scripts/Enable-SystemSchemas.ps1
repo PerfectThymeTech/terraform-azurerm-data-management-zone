@@ -13,7 +13,7 @@ $ErrorActionPreference = "Stop"
 $accessToken = $(az account get-access-token --resource "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d" --query "accessToken" --output tsv)
 
 # Get metastore for current workspace
-$url = "${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/current-metastore-assignment"
+$url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/current-metastore-assignment"
 $headers = @{
     'Content-Type'  = 'application/json'
     'Authorization' = "Bearer ${accessToken}"
@@ -37,7 +37,7 @@ catch {
 
 
 # Get system schemas
-$url = "${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas"
+$url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas"
 $headers = @{
     'Content-Type'  = 'application/json'
     'Authorization' = "Bearer ${accessToken}"
@@ -62,7 +62,7 @@ catch {
 foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
     if ($systemSchema.state -eq "AVAILABLE") {
         # Enable system schema
-        $url = "${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchema.schema}"
+        $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchema.schema}"
         $headers = @{
             'Content-Type'  = 'application/json'
             'Authorization' = "Bearer ${accessToken}"
