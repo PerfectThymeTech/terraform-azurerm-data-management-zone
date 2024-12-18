@@ -18,3 +18,12 @@ output "subnet_ids_databricks" {
     }
   }
 }
+
+output "private_dns_zone_ids" {
+  description = "Specifies the ids of the private dns zones for Databricks workspaces."
+  sensitive   = false
+  value       = {
+    for key, value in local.private_dns_zone_names:
+    key => azurerm_private_dns_zone.private_dns_zone[key].id
+  }
+}

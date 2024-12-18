@@ -40,22 +40,22 @@ locals {
   }
 
   # DNS locals
-  private_dns_zone_names = [
+  private_dns_zone_names = {
     # Azure Databricks
-    "privatelink.azuredatabricks.net",
+    databricks = "privatelink.azuredatabricks.net",
 
     # Azure Storage
-    "privatelink.blob.core.windows.net",
-    "privatelink.dfs.core.windows.net",
-  ]
+    blob = "privatelink.blob.core.windows.net",
+    dfs  = "privatelink.dfs.core.windows.net",
+  }
 
   # DNS link locals
   private_dns_zone_virtual_network_links = merge([
     for location in var.locations_databricks : {
-      for name in tolist(local.private_dns_zone_names) :
-      "${location}-${replace(name, ".", "-")}" => {
+      for key, value in local.private_dns_zone_names :
+      "${location}-${key}" => {
         location_databricks   = location
-        private_dns_zone_name = name
+        private_dns_zone_name = value
       }
     }
   ]...)
