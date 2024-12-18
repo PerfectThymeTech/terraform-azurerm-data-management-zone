@@ -65,6 +65,8 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
     $systemSchemaState = $systemSchema.state
     $systemSchemaName = $systemSchema.schema
 
+    Write-Host "Starting to enable system schema '${systemSchemaName}' with state '${systemSchemaState}' in metastore ${currentMetastoreId}"
+
     if ($systemSchemaState -eq "AVAILABLE") {
         # Enable system schema
         $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchemaName}"
@@ -72,17 +74,15 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
             'Content-Type'  = 'application/json'
             'Authorization' = "Bearer ${accessToken}"
         }
-        $body = @{} | ConvertTo-Json
         $parameters = @{
             'Uri'         = $url
             'Method'      = 'PUT'
             'Headers'     = $headers
-            'Body'        = $body
             'ContentType' = 'application/json'
         }
         try {
             _ = Invoke-RestMethod @parameters
-            Write-Host "Successfully enabled system schema '${$systemSchemaName}' in metastore ${currentMetastoreId}"
+            Write-Host "Successfully enabled system schema '${systemSchemaName}' in metastore ${currentMetastoreId}"
         }
         catch {
             $message = "REST API call to enable system schema failed"
