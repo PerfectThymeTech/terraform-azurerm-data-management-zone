@@ -58,5 +58,5 @@ locals {
         private_dns_zone_name = name
       }
     }
-  ])
+  ]...)
 }
