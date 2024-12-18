@@ -17,8 +17,9 @@ locals {
   }
 
   # Subnet locals
-  subnet_databricks_private_name = "DatabricksPrivateSubnet"
-  subnet_databricks_public_name  = "DatabricksPublicSubnet"
+  subnet_databricks_private_name          = "DatabricksPrivateSubnet"
+  subnet_databricks_public_name           = "DatabricksPublicSubnet"
+  subnet_databricks_private_endpoint_name = "PrivateEndpointSubnet"
   subnet_private_endpoints = {
     name = "ServicesSubnet"
     properties = {

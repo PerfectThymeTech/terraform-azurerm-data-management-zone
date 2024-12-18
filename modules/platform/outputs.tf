@@ -15,6 +15,8 @@ output "subnet_ids_databricks" {
       subnet_databricks_private_id   = "${azurerm_virtual_network.virtual_network_databricks[location].id}/subnets/${local.subnet_databricks_private_name}"
       subnet_databricks_public_name  = local.subnet_databricks_public_name
       subnet_databricks_public_id    = "${azurerm_virtual_network.virtual_network_databricks[location].id}/subnets/${local.subnet_databricks_public_name}"
+      subnet_databricks_private_endpoint_name  = local.subnet_databricks_private_endpoint_name
+      subnet_databricks_private_endpoint_id    = "${azurerm_virtual_network.virtual_network_databricks[location].id}/subnets/${local.subnet_databricks_private_endpoint_name}"
     }
   }
 }

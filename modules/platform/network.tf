@@ -99,4 +99,15 @@ resource "azurerm_virtual_network" "virtual_network_databricks" {
     service_endpoint_policy_ids                   = []
     service_endpoints                             = []
   }
+  subnet {
+    name                                          = local.subnet_databricks_private_endpoint_name
+    address_prefixes                              = ["10.0.0.128/26"]
+    default_outbound_access_enabled               = true
+    private_endpoint_network_policies             = "Enabled"
+    private_link_service_network_policies_enabled = true
+    route_table_id                                = azurerm_route_table.route_table_databricks[each.key].id
+    security_group                                = azurerm_network_security_group.network_security_group_databricks[each.key].id
+    service_endpoint_policy_ids                   = []
+    service_endpoints                             = []
+  }
 }
