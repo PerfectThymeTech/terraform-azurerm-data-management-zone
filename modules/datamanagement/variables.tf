@@ -133,6 +133,8 @@ variable "subnet_ids_databricks" {
     subnet_databricks_private_id   = string
     subnet_databricks_public_name  = string
     subnet_databricks_public_id    = string
+    subnet_databricks_private_endpoint_name = string
+    subnet_databricks_private_endpoint_id = string
   }))
   sensitive = false
   default   = {}
@@ -153,6 +155,12 @@ variable "subnet_ids_databricks" {
       for key, value in var.subnet_ids_databricks : length(split("/", value.subnet_databricks_public_id)) == 11
     ])
     error_message = "Please specify a valid subnet id for the public subnet."
+  }
+  validation {
+    condition = alltrue([
+      for key, value in var.subnet_ids_databricks : length(split("/", value.subnet_databricks_private_endpoint_id)) == 11
+    ])
+    error_message = "Please specify a valid subnet id for the private endpoint subnet."
   }
   validation {
     condition     = length(var.subnet_ids_databricks) == length(var.locations_databricks)
