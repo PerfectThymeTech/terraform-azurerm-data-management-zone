@@ -69,7 +69,7 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
 
     if ($systemSchemaState -eq "AVAILABLE") {
         # Enable system schema
-        $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchemaName}"
+        $url = "https://${DatabricksWorkspaceUrl}/api/2.0/unity-catalog/metastores/${currentMetastoreId}/systemschemas/${systemSchemaName}"
         $headers = @{
             'Content-Type'  = 'application/json'
             'Authorization' = "Bearer ${accessToken}"
