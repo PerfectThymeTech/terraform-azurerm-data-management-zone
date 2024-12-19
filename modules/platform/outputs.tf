@@ -26,6 +26,9 @@ output "private_dns_zone_ids" {
   sensitive   = false
   value = {
     for key, value in local.private_dns_zone_names :
-    key => azurerm_private_dns_zone.private_dns_zone[key].id
+    key => {
+      id   = azurerm_private_dns_zone.private_dns_zone[key].id
+      name = azurerm_private_dns_zone.private_dns_zone[key].name
+    }
   }
 }

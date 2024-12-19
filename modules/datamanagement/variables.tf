@@ -271,6 +271,22 @@ variable "private_dns_zone_id_vault" {
   }
 }
 
+variable "databricks_private_dns_zone_ids" {
+  description = "Specifies the resource IDs of the private DNS zones for the Databricks vnet islands."
+  type = map(object({
+    id   = string
+    name = string
+  }))
+  sensitive = false
+  nullable  = false
+  validation {
+    condition = alltrue([
+      for key, value in var.databricks_private_dns_zone_ids : length(split("/", value.id)) == 9
+    ])
+    error_message = "Please specify a valid resource id for the private dns zones."
+  }
+}
+
 # Customer-managed key variables
 variable "customer_managed_key" {
   description = "Specifies the customer managed key configurations."
