@@ -125,61 +125,23 @@ The following requirements are needed by this module:
 
 - <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) (~> 1.58)
 
-- <a name="requirement_external"></a> [external](#requirement\_external) (~> 2.3)
-
 - <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Modules
 
 The following Modules are called:
 
-### <a name="module_container_registry"></a> [container\_registry](#module\_container\_registry)
+### <a name="module_datamanagement"></a> [datamanagement](#module\_datamanagement)
 
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/containerregistry
+Source: ./modules/datamanagement
 
-Version: main
+Version:
 
-### <a name="module_databricks_access_connector"></a> [databricks\_access\_connector](#module\_databricks\_access\_connector)
+### <a name="module_platform"></a> [platform](#module\_platform)
 
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksaccessconnector
+Source: ./modules/platform
 
-Version: main
-
-### <a name="module_databricks_workspace"></a> [databricks\_workspace](#module\_databricks\_workspace)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/databricksworkspace
-
-Version: main
-
-### <a name="module_key_vault_purview"></a> [key\_vault\_purview](#module\_key\_vault\_purview)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
-
-Version: main
-
-### <a name="module_key_vault_scim"></a> [key\_vault\_scim](#module\_key\_vault\_scim)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/keyvault
-
-Version: main
-
-### <a name="module_purview_account"></a> [purview\_account](#module\_purview\_account)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/purview
-
-Version: main
-
-### <a name="module_synapse_private_link_hub"></a> [synapse\_private\_link\_hub](#module\_synapse\_private\_link\_hub)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/synapseprivetlinkhub
-
-Version: main
-
-### <a name="module_user_assigned_identity"></a> [user\_assigned\_identity](#module\_user\_assigned\_identity)
-
-Source: github.com/PerfectThymeTech/terraform-azurerm-modules//modules/userassignedidentity
-
-Version: main
+Version:
 
 <!-- markdownlint-disable MD013 -->
 <!-- markdownlint-disable MD034 -->
@@ -306,6 +268,14 @@ Type: `string`
 
 Default: `""`
 
+### <a name="input_private_dns_zone_id_dfs"></a> [private\_dns\_zone\_id\_dfs](#input\_private\_dns\_zone\_id\_dfs)
+
+Description: Specifies the resource ID of the private DNS zone for Azure Storage dfs endpoints. Not required if DNS A-records get created via Azure Policy.
+
+Type: `string`
+
+Default: `""`
+
 ### <a name="input_private_dns_zone_id_purview_platform"></a> [private\_dns\_zone\_id\_purview\_platform](#input\_private\_dns\_zone\_id\_purview\_platform)
 
 Description: Specifies the resource ID of the private DNS zone for Azure Key Vault. Not required if DNS A-records get created via Azure Policy.
@@ -394,35 +364,7 @@ Default: `true`
 
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_container_registry_id"></a> [container\_registry\_id](#output\_container\_registry\_id)
-
-Description: Specifies the id of the container registry.
-
-### <a name="output_databricks_access_connector_id"></a> [databricks\_access\_connector\_id](#output\_databricks\_access\_connector\_id)
-
-Description: Specifies the ids of the databricks access connectors.
-
-### <a name="output_databricks_workspace_ids"></a> [databricks\_workspace\_ids](#output\_databricks\_workspace\_ids)
-
-Description: Specifies the ids of the databricks workspaces.
-
-### <a name="output_key_vault_purview_id"></a> [key\_vault\_purview\_id](#output\_key\_vault\_purview\_id)
-
-Description: Specifies the id of the Azure key vault provisioned for Microsoft Purview.
-
-### <a name="output_key_vault_scim_id"></a> [key\_vault\_scim\_id](#output\_key\_vault\_scim\_id)
-
-Description: Specifies the id of the Azure key vault provisioned for SCIM.
-
-### <a name="output_purview_id"></a> [purview\_id](#output\_purview\_id)
-
-Description: Specifies the id of the Microsoft Purview account.
-
-### <a name="output_synapse_private_link_hub_id"></a> [synapse\_private\_link\_hub\_id](#output\_synapse\_private\_link\_hub\_id)
-
-Description: Specifies the id of the Azure synapse private link hub.
+No outputs.
 
 <!-- markdownlint-enable -->
 ## License
