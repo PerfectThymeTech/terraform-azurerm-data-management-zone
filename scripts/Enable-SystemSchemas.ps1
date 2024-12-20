@@ -8,6 +8,9 @@ param (
 
 # Configuration
 $ErrorActionPreference = "Stop"
+$ignoreListSystemSchemas = @(
+    "__internal_logging"
+)
 
 # Get access token
 $accessToken = $(az account get-access-token --resource "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d" --query "accessToken" --output tsv)
@@ -67,6 +70,11 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
     $systemSchemaName = $systemSchema.schema
 
     Write-Host "Starting to enable system schema '${systemSchemaName}' with state '${systemSchemaState}' in metastore ${currentMetastoreId}"
+
+    # Check whether schema is in ignore list
+    if ($systemSchema -in $ignoreListSystemSchemas) {
+        continue
+    }
 
     if ($systemSchemaState -eq "AVAILABLE") {
         # Enable system schema
