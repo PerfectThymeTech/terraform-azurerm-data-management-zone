@@ -62,6 +62,8 @@ module "datamanagement" {
   private_dns_zone_id_databricks         = var.private_dns_zone_id_databricks
   private_dns_zone_id_container_registry = var.private_dns_zone_id_container_registry
   private_dns_zone_id_vault              = var.private_dns_zone_id_vault
+  private_dns_zone_id_synapse_portal     = var.private_dns_zone_id_synapse_portal
+  databricks_private_dns_zone_ids        = module.platform.private_dns_zone_ids
 
   # Customer-managed key variables
   customer_managed_key = var.customer_managed_key
