@@ -72,7 +72,7 @@ foreach ($systemSchema in $responseGetSystemSchemas.schemas) {
     Write-Host "Starting to enable system schema '${systemSchemaName}' with state '${systemSchemaState}' in metastore ${currentMetastoreId}"
 
     # Check whether schema is in ignore list
-    if ($systemSchema -in $ignoreListSystemSchemas) {
+    if ($systemSchemaName -in $ignoreListSystemSchemas) {
         continue
     }
 
