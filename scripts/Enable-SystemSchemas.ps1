@@ -9,7 +9,8 @@ param (
 # Configuration
 $ErrorActionPreference = "Stop"
 $ignoreListSystemSchemas = @(
-    "__internal_logging"
+    "__internal_logging",
+    "lineage"
 )
 
 # Get access token
