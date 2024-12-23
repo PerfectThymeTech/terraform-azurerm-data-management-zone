@@ -15,7 +15,6 @@ $ignoreListSystemSchemas = @(
 
 # Get access token
 $accessToken = $(az account get-access-token --resource "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d" --query "accessToken" --output tsv)
-Write-Host $accessToken
 
 # Get metastore for current workspace
 $url = "https://${DatabricksWorkspaceUrl}/api/2.1/unity-catalog/current-metastore-assignment"
