@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "resource_group_private_dns" {
 }
 
 resource "azurerm_resource_group" "resource_group_network_databricks" {
-  name     = "${local.prefix}-monitoring-rg"
+  name     = "${local.prefix}-network-databricks-rg"
   location = var.location
   tags     = var.tags
 }
