@@ -6,7 +6,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_datab
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
-  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-uiapi-nic"
+  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-uiapi-nic"
   private_service_connection {
     name                           = "${module.databricks_workspace[each.key].databricks_workspace_name}-uiapi-svc"
     is_manual_connection           = false
@@ -30,7 +30,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
-  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-blob-nic"
+  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-blob-nic"
   private_service_connection {
     name                           = "${module.databricks_workspace[each.key].databricks_workspace_name}-blob-svc"
     is_manual_connection           = false
@@ -54,7 +54,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
 
-  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-dfs-nic"
+  custom_network_interface_name = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-dfs-nic"
   private_service_connection {
     name                           = "${module.databricks_workspace[each.key].databricks_workspace_name}-dfs-svc"
     is_manual_connection           = false
