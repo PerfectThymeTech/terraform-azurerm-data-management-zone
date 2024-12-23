@@ -1,5 +1,5 @@
 resource "time_rotating" "databricks_account_scim_token_regenerate" {
-  rotation_months = 1
+  rotation_months = 12
 }
 
 resource "null_resource" "databricks_account_scim_token" {
