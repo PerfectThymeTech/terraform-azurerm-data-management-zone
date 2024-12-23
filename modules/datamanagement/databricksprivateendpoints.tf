@@ -1,7 +1,7 @@
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_databricks_ui_api" {
   for_each = toset(var.locations_databricks)
 
-  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-uiapi-pe"
+  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-uiapi-pe"
   location            = each.key
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
@@ -25,7 +25,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_datab
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_blob" {
   for_each = toset(var.locations_databricks)
 
-  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-blob-pe"
+  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-blob-pe"
   location            = each.key
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
@@ -49,7 +49,7 @@ resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_
 resource "azurerm_private_endpoint" "private_endpoint_databricks_workspace_dbfs_dfs" {
   for_each = toset(var.locations_databricks)
 
-  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-dfs-pe"
+  name                = "${module.databricks_workspace[each.key].databricks_workspace_name}-ddctd-dfs-pe"
   location            = each.key
   resource_group_name = azurerm_resource_group.connectivity_adb_rg[each.key].name
   tags                = var.tags
