@@ -1,5 +1,5 @@
 resource "time_rotating" "databricks_account_scim_token_regenerate" {
-  rotation_months = 1
+  rotation_months = 12
 }
 
 resource "null_resource" "databricks_account_scim_token" {
@@ -8,7 +8,7 @@ resource "null_resource" "databricks_account_scim_token" {
   }
 
   provisioner "local-exec" {
-    working_dir = "${path.module}/scripts/"
+    working_dir = "${path.module}/../../scripts/"
     command     = "pwsh ./Get-AccountScimToken.ps1 -DatabricksAccountId ${var.databricks_account_id} -KeyVaultName ${module.key_vault_scim.key_vault_name} -KeyVaultSecretName ${local.databricks_account_scim_secret_name}"
     environment = {}
   }

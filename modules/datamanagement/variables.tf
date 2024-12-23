@@ -22,10 +22,6 @@ variable "locations_databricks" {
   type        = list(string)
   sensitive   = false
   default     = []
-  validation {
-    condition     = length(var.locations_databricks) > 0
-    error_message = "Please provide at least one databricks location"
-  }
 }
 
 variable "environment" {
@@ -34,8 +30,8 @@ variable "environment" {
   sensitive   = false
   default     = "dev"
   validation {
-    condition     = contains(["dev", "tst", "qa", "prd"], var.environment)
-    error_message = "Please use an allowed value: \"dev\", \"tst\", \"qa\" or \"prd\"."
+    condition     = contains(["int", "dev", "tst", "qa", "uat", "prd"], var.environment)
+    error_message = "Please use an allowed value: \"int\", \"dev\", \"tst\", \"qa\", \"uat\" or \"prd\"."
   }
 }
 
@@ -102,63 +98,85 @@ variable "zone_redundancy_enabled" {
 }
 
 # Logging and monitoring variables
-variable "log_analytics_workspace_id" {
-  description = "Specifies the log analytics workspace used to configure diagnostics."
-  type        = string
-  sensitive   = false
-  nullable    = true
-  default     = null
+variable "diagnostics_configurations" {
+  description = "Specifies the diagnostic configuration for the service."
+  type = list(object({
+    log_analytics_workspace_id = optional(string, ""),
+    storage_account_id         = optional(string, "")
+  }))
+  sensitive = false
+  default   = []
   validation {
-    condition     = var.log_analytics_workspace_id == null || length(try(split("/", var.log_analytics_workspace_id), [])) == 9
-    error_message = "Please specify a valid resource id."
+    condition = alltrue([
+      length([for diagnostics_configuration in toset(var.diagnostics_configurations) : diagnostics_configuration if diagnostics_configuration.log_analytics_workspace_id == "" && diagnostics_configuration.storage_account_id == ""]) <= 0
+    ])
+    error_message = "Please specify a valid resource ID."
   }
 }
 
 # Network variables
-variable "vnet_id" {
-  description = "Specifies the resource ID of the Vnet used for the Data Management Zone"
+variable "subnet_id_private_endpoints" {
+  description = "Specifies the id of the private endpoint subnet used for the data management services."
   type        = string
   sensitive   = false
   validation {
-    condition     = length(split("/", var.vnet_id)) == 9
+    condition     = length(split("/", var.subnet_id_private_endpoints)) == 11
     error_message = "Please specify a valid resource ID."
   }
 }
 
-variable "nsg_id" {
-  description = "Specifies the resource ID of the default network security group for the Data Management Zone"
-  type        = string
-  sensitive   = false
-  validation {
-    condition     = length(split("/", var.nsg_id)) == 9
-    error_message = "Please specify a valid resource ID."
-  }
-}
-
-variable "route_table_id" {
-  description = "Specifies the resource ID of the default route table for the Data Management Zone"
-  type        = string
-  sensitive   = false
-  validation {
-    condition     = length(split("/", var.route_table_id)) == 9
-    error_message = "Please specify a valid resource ID."
-  }
-}
-
-variable "subnet_cidr_ranges" {
-  description = "Specifies the cidr ranges of the subnets used for the Data Management Zone. If not specified, the module will automatically define the right subnet cidr ranges. For this to work, the provided vnet must have no subnets."
-  type = object(
-    {
-      private_endpoint_subnet = optional(string, "")
-    }
-  )
+variable "subnet_ids_databricks" {
+  description = "Specifies the ids of the subnets for the databricks workspaces."
+  type = map(object({
+    vnet_id                                 = string
+    subnet_databricks_private_name          = string
+    subnet_databricks_private_id            = string
+    subnet_databricks_public_name           = string
+    subnet_databricks_public_id             = string
+    subnet_databricks_private_endpoint_name = string
+    subnet_databricks_private_endpoint_id   = string
+  }))
   sensitive = false
   default   = {}
   validation {
     condition = alltrue([
-      var.subnet_cidr_ranges.private_endpoint_subnet == "" || try(cidrnetmask(var.subnet_cidr_ranges.private_endpoint_subnet), "invalid") != "invalid",
+      for key, value in var.subnet_ids_databricks : length(split("/", value.vnet_id)) == 9
     ])
-    error_message = "Please specify a valid CIDR range for all subnets."
+    error_message = "Please specify a valid vnet id."
+  }
+  validation {
+    condition = alltrue([
+      for key, value in var.subnet_ids_databricks : length(split("/", value.subnet_databricks_private_id)) == 11
+    ])
+    error_message = "Please specify a valid subnet id for the private subnet."
+  }
+  validation {
+    condition = alltrue([
+      for key, value in var.subnet_ids_databricks : length(split("/", value.subnet_databricks_public_id)) == 11
+    ])
+    error_message = "Please specify a valid subnet id for the public subnet."
+  }
+  validation {
+    condition = alltrue([
+      for key, value in var.subnet_ids_databricks : length(split("/", value.subnet_databricks_private_endpoint_id)) == 11
+    ])
+    error_message = "Please specify a valid subnet id for the private endpoint subnet."
+  }
+  validation {
+    condition     = length(var.subnet_ids_databricks) == length(var.locations_databricks)
+    error_message = "Please specify a subnet for all locations."
+  }
+}
+
+variable "connectivity_delay_in_seconds" {
+  description = "Specifies the delay in seconds after the private endpoint deployment (required for the DNS automation via Policies)."
+  type        = number
+  sensitive   = false
+  nullable    = false
+  default     = 120
+  validation {
+    condition     = var.connectivity_delay_in_seconds >= 0
+    error_message = "Please specify a valid non-negative number."
   }
 }
 
@@ -208,6 +226,17 @@ variable "private_dns_zone_id_queue" {
   }
 }
 
+variable "private_dns_zone_id_databricks" {
+  description = "Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azure Policy."
+  type        = string
+  sensitive   = false
+  default     = ""
+  validation {
+    condition     = var.private_dns_zone_id_databricks == "" || (length(split("/", var.private_dns_zone_id_databricks)) == 9 && endswith(var.private_dns_zone_id_databricks, "privatelink.azuredatabricks.net"))
+    error_message = "Please specify a valid resource ID for the private DNS Zone."
+  }
+}
+
 variable "private_dns_zone_id_container_registry" {
   description = "Specifies the resource ID of the private DNS zone for Azure Container Registry. Not required if DNS A-records get created via Azure Policy."
   type        = string
@@ -242,14 +271,19 @@ variable "private_dns_zone_id_vault" {
   }
 }
 
-variable "private_dns_zone_id_databricks" {
-  description = "Specifies the resource ID of the private DNS zone for Azure Databricks UI endpoints. Not required if DNS A-records get created via Azure Policy."
-  type        = string
-  sensitive   = false
-  default     = ""
+variable "databricks_private_dns_zone_ids" {
+  description = "Specifies the resource IDs of the private DNS zones for the Databricks vnet islands."
+  type = map(object({
+    id   = string
+    name = string
+  }))
+  sensitive = false
+  nullable  = false
   validation {
-    condition     = var.private_dns_zone_id_databricks == "" || (length(split("/", var.private_dns_zone_id_databricks)) == 9 && endswith(var.private_dns_zone_id_databricks, "privatelink.azuredatabricks.net"))
-    error_message = "Please specify a valid resource ID for the private DNS Zone."
+    condition = alltrue([
+      for key, value in var.databricks_private_dns_zone_ids : length(split("/", value.id)) == 9
+    ])
+    error_message = "Please specify a valid resource id for the private dns zones."
   }
 }
 
